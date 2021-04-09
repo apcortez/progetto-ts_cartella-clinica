@@ -6,8 +6,8 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 env:
-    SONAR_TOKEN: ${{SONAR_TOKEN}}
-    GITHUB_TOKEN: ${{PROGETTOTS}}
+    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.PROGETTOTS }}
 jobs:
   build:
     name: Build
