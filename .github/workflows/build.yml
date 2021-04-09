@@ -6,8 +6,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-    SONAR_TOKEN: fd41f56b6b3227d0ececb1d72f5f84b775ae616f
+    SONAR_TOKEN: 3f99779dc5de9a23e26b916679567a4d968ea4ce
 jobs:
   build:
     name: Build
