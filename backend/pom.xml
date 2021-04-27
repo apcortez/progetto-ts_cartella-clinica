@@ -14,7 +14,7 @@
 	<name>cartella-cardio-virtuale</name>
 	<description>Progettazione e sviluppo di una applicazione web per la gestione della cartella cardiologica virtuale</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>15</java.version>
 		<sonar.projectKey>apcortez_progetto-ts_cartella-clinica</sonar.projectKey>
 		<sonar.organization>apcortez</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
