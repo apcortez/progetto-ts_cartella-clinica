@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
 
 @Entity
 @Table(name="medico")
@@ -16,24 +18,31 @@ public class Medico {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@NotBlank(message="is required")
 	@Column(name="nome")
 	private String nome;
 	
+	@NotBlank(message="is required")
 	@Column(name="cognome")
 	private String cognome;
 	
+	@NotBlank(message="is required")
 	@Column(name="codice_fiscale")
 	private String codice_fiscale;
 	
+	@NotBlank(message="is required")
 	@Column(name="sesso")
-	private char sesso;
+	private String sesso;
 	
+	@NotBlank(message="is required")
 	@Column(name="email")
 	private String email;
 	
+	@NotBlank(message="is required")
 	@Column(name="cellulare")
-	private long cellulare;
+	private String cellulare;
 	
+	@NotBlank(message="is required")
 	@Column(name="specializzazione")
 	private String specializzazione;
 	
@@ -43,7 +52,7 @@ public class Medico {
 	}
 	
 
-	public Medico(String nome, String cognome, String codice_fiscale, char sesso, String email, long cellulare,
+	public Medico(String nome, String cognome, String codice_fiscale, String sesso, String email, String cellulare,
 			String specializzazione) {
 		this.nome = nome;
 		this.cognome = cognome;
@@ -54,7 +63,7 @@ public class Medico {
 		this.specializzazione = specializzazione;
 	}
 
-	public Medico(int id, String nome, String cognome, String codice_fiscale, char sesso, String email, int cellulare, String specializzazione) {
+	public Medico(int id, String nome, String cognome, String codice_fiscale, String sesso, String email, String cellulare, String specializzazione) {
 		this.id = id;
 		this.nome = nome;
 		this.cognome = cognome;
@@ -107,12 +116,12 @@ public class Medico {
 	}
 
 
-	public char getSesso() {
+	public String getSesso() {
 		return sesso;
 	}
 
 
-	public void setSesso(char sesso) {
+	public void setSesso(String sesso) {
 		this.sesso = sesso;
 	}
 
@@ -127,12 +136,12 @@ public class Medico {
 	}
 
 
-	public long getCellulare() {
+	public String getCellulare() {
 		return cellulare;
 	}
 
 
-	public void setCellulare(long cellulare) {
+	public void setCellulare(String cellulare) {
 		this.cellulare = cellulare;
 	}
 

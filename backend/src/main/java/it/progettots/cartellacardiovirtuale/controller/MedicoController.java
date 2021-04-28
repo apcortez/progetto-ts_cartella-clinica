@@ -2,8 +2,11 @@ package it.progettots.cartellacardiovirtuale.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,12 +60,19 @@ public class MedicoController {
 	}
 	
 	@PostMapping("/salva")
-	public String salvaMedico(@ModelAttribute("medico") Medico theMedico) {
-		//save the doctor
-		medicoService.save(theMedico);
+	public String salvaMedico(@ModelAttribute("medico") @Valid Medico theMedico,
+				  BindingResult bindingResult) {
+	
+		if(bindingResult.hasErrors()){
+			return "medici/medico-form";
+		}
+		else {
+			//save the doctor
+			medicoService.save(theMedico);
 		
 		//use a redirect to prevent duplicate submissions
 		return "redirect:/medici/list";
+		}
 	}
 	
 	@GetMapping("/elimina")
