@@ -84,5 +84,27 @@ public class MedicoController {
 		return "redirect:/medici/list";
 	}
 	
-	
+	@GetMapping("/cerca")
+	public String cerca(@RequestParam("nome") String theNome,
+						 @RequestParam("cognome") String theCognome,
+						 Model theModel) {
+		
+		// check names, if both are empty then just give list of all employees
+
+		if (theNome.trim().isEmpty() && theCognome.trim().isEmpty()) {
+			return "redirect:/medici/list";
+		}
+		else {
+			// else, search by first name and last name
+			List<Medico> theMedici =
+							medicoService.searchBy(theNome, theCognome);
+			
+			// add to the spring model
+			theModel.addAttribute("medici", theMedici);
+			
+			// send to list-medici
+			return "medici/list-medici";
+		}
+		
+	}
 }

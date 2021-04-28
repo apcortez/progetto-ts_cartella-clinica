@@ -50,4 +50,11 @@ public class MedicoServiceImpl implements MedicoService {
 		
 	}
 
+	@Override
+	public List<Medico> searchBy(String theNome, String theCognome) {
+		return medicoRepository.
+				findByNomeContainsAndCognomeContainsAllIgnoreCase(
+						theNome, theCognome);	
+	}
+
 }

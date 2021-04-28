@@ -14,12 +14,31 @@
 <div class="container">
 	<h3>Medici Directory</h3>
 	<hr>
+	<!-- Add a search form -->
+
+	<form action="#" th:action="@{/medici/cerca}"
+		  method="GET" class="form-inline">	
 	
 	<!-- Add a button -->
 	<a th:href="@{/medici/showFormForAdd}"
 		class="btn btn-primary btn-sm mb-3">
 		Aggiungi Medico
 	</a>
+	<input type="search"
+			   name="nome"
+			   placeholder="Nome"
+			   class="form-control-sm ml-5 mr-2 mb-3" />
+
+		<input type="search"
+			   name="cognome"
+			   placeholder="Cognome"
+			   class="form-control-sm mr-2 mb-3" />
+
+		<button type="submit"
+				class="btn btn-success btn-sm mb-3">Cerca</button>
+							   
+	</form>
+	
 	<table class="table table-bordered table-striped">
 		<thead class="thead-dark">
 			<tr>

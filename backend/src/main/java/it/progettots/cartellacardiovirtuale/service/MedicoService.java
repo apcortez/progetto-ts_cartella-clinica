@@ -9,4 +9,5 @@ public interface MedicoService {
 	public Medico findById(int theId);
 	public void save(Medico theMedico);
 	public void deleteById(int theId);
+	public List<Medico> searchBy(String theNome, String theCognome);
 }
