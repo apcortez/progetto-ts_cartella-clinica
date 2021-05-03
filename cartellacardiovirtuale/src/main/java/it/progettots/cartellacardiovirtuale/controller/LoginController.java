@@ -3,13 +3,17 @@ package it.progettots.cartellacardiovirtuale.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 @Controller
 public class LoginController {
 
 	@GetMapping("/showMyLoginPage")
 	public String showMyLoginPage() {
 		
-		return "fancy-login";
+		return "login-reg/fancy-login";
 		
 	}
 	
@@ -18,7 +22,7 @@ public class LoginController {
 	@GetMapping("/access-denied")
 	public String showAccessDenied() {
 		
-		return "access-denied";
+		return "login-reg/access-denied";
 		
 	}
 	

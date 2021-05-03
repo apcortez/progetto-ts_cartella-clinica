@@ -1,45 +1,44 @@
 package it.progettots.cartellacardiovirtuale.config;
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import it.progettots.cartellacardiovirtuale.service.UtenteService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	// add a reference to our security data source
+	// add a reference to our user service
+    @Autowired
+    private UtenteService utenteService;
 	
-	@Autowired
-	@Qualifier("securityDataSource")
-	private DataSource securityDataSource;
-		
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    
+   @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
+    }
 	
-		auth.jdbcAuthentication().dataSource(securityDataSource);
-		
-	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-			.antMatchers("/medici/showForm*").hasRole("ADMIN")
-			.antMatchers("/medici/salva*").hasRole("ADMIN")
-			.antMatchers("/medici/delete").hasRole("ADMIN")
-			.antMatchers("/paziente/salva*").hasAnyRole("ADMIN", "MEDICO")
-			.antMatchers("/paziente/**").hasAnyRole("MEDICO", "PAZIENTE")
-			.antMatchers("/resources/**").permitAll()
+			.antMatchers("/medici/**").hasRole("ADMIN")
+			.antMatchers("/").hasAnyRole("ADMIN","PAZIENTE", "MEDICO")
 			.and()
 			.formLogin()
 				.loginPage("/showMyLoginPage")
 				.loginProcessingUrl("/authenticateTheUser")
+				.successHandler(customAuthenticationSuccessHandler)
 				.permitAll()
 			.and()
 			.logout().permitAll()
@@ -47,8 +46,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().accessDeniedPage("/access-denied");
 		
 	}
-		
-}
+	//beans
+		//bcrypt bean definition
+		@Bean
+		public BCryptPasswordEncoder passwordEncoder() {
+			return new BCryptPasswordEncoder();
+		}
+
+		//authenticationProvider bean definition
+		@Bean
+		public DaoAuthenticationProvider authenticationProvider() {
+			DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+			auth.setUserDetailsService(utenteService); //set the custom user details service
+			auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
+			return auth;
+		}
+		  
+	}
+
 
 
 
