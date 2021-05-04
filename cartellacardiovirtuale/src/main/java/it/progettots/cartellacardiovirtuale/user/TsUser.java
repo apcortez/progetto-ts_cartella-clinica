@@ -1,5 +1,7 @@
 package it.progettots.cartellacardiovirtuale.user;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,7 +30,7 @@ public class TsUser {
 	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
-	private String sesso;
+	private String genere;
 	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
@@ -39,8 +41,8 @@ public class TsUser {
 	private String cellulare;
 	
 	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
-	private String data_nascita;
+	//@Size(min = 10, message = "is required")
+	private Date data_nascita;
 	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
@@ -90,12 +92,12 @@ public class TsUser {
 		this.cognome = cognome;
 	}
 
-	public String getSesso() {
-		return sesso;
+	public String getGenere() {
+		return genere;
 	}
 
-	public void setSesso(String sesso) {
-		this.sesso = sesso;
+	public void setGenere(String genere) {
+		this.genere = genere;
 	}
 
 	public String getEmail() {
@@ -114,11 +116,11 @@ public class TsUser {
 		this.cellulare = cellulare;
 	}
 
-	public String getData_nascita() {
+	public Date getData_nascita() {
 		return data_nascita;
 	}
 
-	public void setData_nascita(String data_nascita) {
+	public void setData_nascita(Date data_nascita) {
 		this.data_nascita = data_nascita;
 	}
 

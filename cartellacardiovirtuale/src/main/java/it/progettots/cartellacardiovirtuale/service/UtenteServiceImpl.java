@@ -52,7 +52,7 @@ public class UtenteServiceImpl implements UtenteService {
 		utente.setPassword(passwordEncoder.encode(tsUser.getPassword()));
 		utente.setNome(tsUser.getNome());
 		utente.setCognome(tsUser.getCognome());
-		utente.setSesso(tsUser.getSesso());
+		utente.setGenere(tsUser.getGenere());
 		utente.setEmail(tsUser.getEmail());
 		utente.setCellulare(tsUser.getCellulare());
 		utente.setData_nascita(tsUser.getData_nascita());

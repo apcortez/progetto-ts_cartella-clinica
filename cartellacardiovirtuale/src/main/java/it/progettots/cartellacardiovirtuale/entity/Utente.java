@@ -1,5 +1,6 @@
 package it.progettots.cartellacardiovirtuale.entity;
 
+import java.sql.Date;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -35,8 +36,8 @@ public class Utente {
 	@Column(name="cognome")
 	private String cognome;
 	
-	@Column(name="sesso")
-	private String sesso;
+	@Column(name="genere")
+	private String genere;
 	
 	@Column(name="email")
 	private String email;
@@ -45,7 +46,7 @@ public class Utente {
 	private String cellulare;
 	
 	@Column(name="data_nascita")
-	private String data_nascita;
+	private Date data_nascita;
 	
 	@Column(name="luogo_nascita")
 	private String luogo_nascita;
@@ -61,26 +62,26 @@ public class Utente {
 		
 	}
 
-	public Utente(String username, String password, String nome, String cognome, String sesso, String email,
-			String cellulare, String data_nascita, String luogo_nascita) {
+	public Utente(String username, String password, String nome, String cognome, String genere, String email,
+			String cellulare, Date data_nascita, String luogo_nascita) {
 		this.username = username;
 		this.password = password;
 		this.nome = nome;
 		this.cognome = cognome;
-		this.sesso = sesso;
+		this.genere = genere;
 		this.email = email;
 		this.cellulare = cellulare;
 		this.data_nascita = data_nascita;
 		this.luogo_nascita = luogo_nascita;
 	}
 
-	public Utente(String username, String password, String nome, String cognome, String sesso, String email,
-			String cellulare, String data_nascita, String luogo_nascita, Collection<Ruolo> ruoli) {
+	public Utente(String username, String password, String nome, String cognome, String genere, String email,
+			String cellulare, Date data_nascita, String luogo_nascita, Collection<Ruolo> ruoli) {
 		this.username = username;
 		this.password = password;
 		this.nome = nome;
 		this.cognome = cognome;
-		this.sesso = sesso;
+		this.genere = genere;
 		this.email = email;
 		this.cellulare = cellulare;
 		this.data_nascita = data_nascita;
@@ -128,12 +129,12 @@ public class Utente {
 		this.cognome = cognome;
 	}
 
-	public String getSesso() {
-		return sesso;
+	public String getGenere() {
+		return genere;
 	}
 
-	public void setSesso(String sesso) {
-		this.sesso = sesso;
+	public void setGenere(String genere) {
+		this.genere = genere;
 	}
 
 	public String getEmail() {
@@ -152,11 +153,11 @@ public class Utente {
 		this.cellulare = cellulare;
 	}
 
-	public String getData_nascita() {
+	public Date getData_nascita() {
 		return data_nascita;
 	}
 
-	public void setData_nascita(String data_nascita) {
+	public void setData_nascita(Date data_nascita) {
 		this.data_nascita = data_nascita;
 	}
 
@@ -179,7 +180,7 @@ public class Utente {
 	@Override
 	public String toString() {
 		return "Utente [id=" + id + ", username=" + username + ", password=" + password + ", nome=" + nome
-				+ ", cognome=" + cognome + ", sesso=" + sesso + ", email=" + email + ", cellulare=" + cellulare
+				+ ", cognome=" + cognome + ", genere=" + genere + ", email=" + email + ", cellulare=" + cellulare
 				+ ", data_nascita=" + data_nascita + ", luogo_nascita=" + luogo_nascita + ", ruoli=" + roles + "]";
 	}
 	
