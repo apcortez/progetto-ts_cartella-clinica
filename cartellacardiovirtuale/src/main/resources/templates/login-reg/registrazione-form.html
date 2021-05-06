@@ -143,10 +143,10 @@
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
 							<input type="text" th:field="*{cellulare}" placeholder="Cellulare (*)" class="form-control" th:errorclass="fieldError" />
 						</div>
-						<div th:if="${#fields.hasErrors('Cellulare')}"
+						<div th:if="${#fields.hasErrors('cellulare')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('cellulre')}" th:text="'Cellulare ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('cellulare')}" th:text="'Cellulare ' + ${err}" />
 							</ul>						
 						</div>
 						
