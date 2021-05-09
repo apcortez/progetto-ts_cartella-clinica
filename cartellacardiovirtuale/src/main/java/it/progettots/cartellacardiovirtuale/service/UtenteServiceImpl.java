@@ -4,12 +4,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import javax.management.relation.Role;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.progettots.cartellacardiovirtuale.dao.RuoloDAO;
 import it.progettots.cartellacardiovirtuale.dao.UtenteDAO;
+import it.progettots.cartellacardiovirtuale.entity.AnagraficaUtente;
 import it.progettots.cartellacardiovirtuale.entity.Ruolo;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
 import it.progettots.cartellacardiovirtuale.user.TsUser;
@@ -47,16 +45,19 @@ public class UtenteServiceImpl implements UtenteService {
 	@Transactional
 	public void salva(TsUser tsUser) {
 		Utente utente = new Utente();
+		AnagraficaUtente anagrafica = new AnagraficaUtente();
+		
 		 // assign user details to the user object
 		utente.setUsername(tsUser.getUsername());
 		utente.setPassword(passwordEncoder.encode(tsUser.getPassword()));
-		utente.setNome(tsUser.getNome());
-		utente.setCognome(tsUser.getCognome());
-		utente.setGenere(tsUser.getGenere());
-		utente.setEmail(tsUser.getEmail());
-		utente.setCellulare(tsUser.getCellulare());
-		utente.setData_nascita(tsUser.getData_nascita());
-		utente.setLuogo_nascita(tsUser.getLuogo_nascita());
+		
+		anagrafica.setNome(tsUser.getNome());
+		anagrafica.setCognome(tsUser.getCognome());
+		anagrafica.setGenere(tsUser.getGenere());
+		anagrafica.setEmail(tsUser.getEmail());
+		anagrafica.setCellulare(tsUser.getCellulare());
+		anagrafica.setData_nascita(tsUser.getData_nascita());
+		anagrafica.setLuogo_nascita(tsUser.getLuogo_nascita());
 
 		// give user default role of "paziente"
 		utente.setRoles(Arrays.asList(ruoloDao.findRuoloByNome("ROLE_PAZIENTE")));

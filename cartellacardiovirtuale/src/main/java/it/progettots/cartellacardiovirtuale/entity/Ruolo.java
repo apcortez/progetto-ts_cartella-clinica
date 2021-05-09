@@ -15,7 +15,7 @@ public class Ruolo {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="nome_ruolo")
+	@Column(name="name")
 	private String nome_ruolo;
 	
 	public Ruolo() {
