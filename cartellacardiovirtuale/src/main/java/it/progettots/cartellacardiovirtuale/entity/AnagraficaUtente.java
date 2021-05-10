@@ -1,20 +1,28 @@
 package it.progettots.cartellacardiovirtuale.entity;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
-public class AnagraficaUtente implements Serializable{
-	
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="anagrafica")
+public class AnagraficaUtente{
+
 	@OneToOne
-	@PrimaryKeyJoinColumn(name="utente_username")
+	@JoinColumn(name="utente_username")
 	private Utente utente;
 	
 	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Column(name="utente_username")
 	private String codice_fiscale;
 	
@@ -46,9 +54,11 @@ public class AnagraficaUtente implements Serializable{
 		
 	}
 
-	public AnagraficaUtente(String codice_fiscale, String nome, String cognome, String genere, String email,
-			String cellulare, Date data_nascita, String luogo_nascita, String specializzazione) {
-		this.codice_fiscale = codice_fiscale;
+	
+	
+	public AnagraficaUtente(Utente utente, String nome, String cognome, String genere, String email, String cellulare,
+			Date data_nascita, String luogo_nascita, String specializzazione) {
+		this.utente = utente;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.genere = genere;
@@ -59,9 +69,12 @@ public class AnagraficaUtente implements Serializable{
 		this.specializzazione = specializzazione;
 	}
 
-	public AnagraficaUtente(String codice_fiscale, String nome, String cognome, String genere, String email,
-			String cellulare, Date data_nascita, String luogo_nascita) {
-		this.codice_fiscale = codice_fiscale;
+
+	
+
+	public AnagraficaUtente(Utente utente, String nome, String cognome, String genere, String email, String cellulare,
+			Date data_nascita, String luogo_nascita) {
+		this.utente = utente;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.genere = genere;
@@ -71,15 +84,7 @@ public class AnagraficaUtente implements Serializable{
 		this.luogo_nascita = luogo_nascita;
 	}
 
-	
-	
-	public String getCodice_fiscale() {
-		return codice_fiscale;
-	}
 
-	public void setCodice_fiscale(String codice_fiscale) {
-		this.codice_fiscale = codice_fiscale;
-	}
 
 	public String getNome() {
 		return nome;
@@ -145,12 +150,15 @@ public class AnagraficaUtente implements Serializable{
 		this.specializzazione = specializzazione;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "AnagraficaUtente [codice_fiscale=" + codice_fiscale + ", nome=" + nome + ", cognome=" + cognome
-				+ ", genere=" + genere + ", email=" + email + ", cellulare=" + cellulare + ", data_nascita="
-				+ data_nascita + ", luogo_nascita=" + luogo_nascita + ", specializzazione=" + specializzazione + "]";
+		return "AnagraficaUtente [utente=" + utente + ", nome=" + nome + ", cognome=" + cognome + ", genere=" + genere
+				+ ", email=" + email + ", cellulare=" + cellulare + ", data_nascita=" + data_nascita
+				+ ", luogo_nascita=" + luogo_nascita + ", specializzazione=" + specializzazione + "]";
 	}
-	
+
+
 	
 }

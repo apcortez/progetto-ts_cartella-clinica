@@ -27,7 +27,7 @@ public class Utente {
 	@Column(name="enabled")
 	private int enabled;
 	
-	@OneToOne(mappedBy="utente", cascade = {CascadeType.ALL})	
+	@OneToOne(mappedBy="utente", cascade = CascadeType.ALL)	
 	private AnagraficaUtente anagrafica;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

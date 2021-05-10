@@ -48,6 +48,8 @@ public class TsUser {
 	@Size(min = 1, message = "is required")
 	private String luogo_nascita;
 	
+	private String specializzazione;
+	
 	public TsUser() {
 		
 	}
@@ -130,6 +132,14 @@ public class TsUser {
 
 	public void setLuogo_nascita(String luogo_nascita) {
 		this.luogo_nascita = luogo_nascita;
+	}
+
+	public String getSpecializzazione() {
+		return specializzazione;
+	}
+
+	public void setSpecializzazione(String specializzazione) {
+		this.specializzazione = specializzazione;
 	}
 	
 	

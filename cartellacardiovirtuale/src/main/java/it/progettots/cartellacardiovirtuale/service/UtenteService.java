@@ -11,4 +11,7 @@ public interface UtenteService extends UserDetailsService {
 	
 	public void salva(TsUser tsUser);
 
+	public void salvaMedico(TsUser tsUser);
+
+
 }

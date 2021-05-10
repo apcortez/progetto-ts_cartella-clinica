@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Salva Medico</title>
+</head>
+<body>
+
+	<div class="container">
+		
+		<h3>Medici Directory</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Salva Medico</p>
+		<form action="#" th:action="@{/medici/salva}"
+						 th:object="${medico}" method="POST">
+						 
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{id}"/>
+			
+			<div class="form-inline">
+			 	<input type="text" th:field="*{nome}"
+					class="form-control mb-4 col-4" placeholder="Nome">	
+			
+				<!-- Add error message (if present) -->
+				<span th:if="${#fields.hasErrors('nome')}"
+					  th:errors="*{nome}"
+					  class="badge badge-danger ml-2 mb-4"></span>
+			</div>
+
+			<div class="form-inline">		
+				<input type="text" th:field="*{cognome}"
+					class="form-control mb-4 col-4" placeholder="Cognome">
+	 
+				<!-- Add error message (if present) -->
+				<span th:if="${#fields.hasErrors('cognome')}"
+					  th:errors="*{cognome}"
+					  class="badge badge-danger ml-2 mb-4"></span>
+			</div>
+
+			<div class="form-inline">		
+				<input type="text" th:field="*{codice_fiscale}"
+					class="form-control mb-4 col-4" placeholder="Codice Fiscale">
+			
+				<!-- Add error message (if present) -->
+				<span th:if="${#fields.hasErrors('codice_fiscale')}"
+					  th:errors="*{codice_fiscale}"
+					  class="badge badge-danger ml-2 mb-4"></span>
+			</div>
+
+			<div class="form-inline">		
+				<input type="text" th:field="*{sesso}"
+					class="form-control mb-4 col-4" placeholder="Sesso">
+				
+				<!-- Add error message (if present) -->
+				<span th:if="${#fields.hasErrors('sesso')}"
+					  th:errors="*{sesso}"
+					  class="badge badge-danger ml-2 mb-4"></span>
+			</div>
+
+			<div class="form-inline">		
+				<input type="text" th:field="*{email}"
+					class="form-control mb-4 col-4" placeholder="Email">
+
+				<!-- Add error message (if present) -->
+				<span th:if="${#fields.hasErrors('email')}"
+					  th:errors="*{email}"
+					  class="badge badge-danger ml-2 mb-4"></span>
+			</div>
+
+			<div class="form-inline">	
+				<input type="text" th:field="*{cellulare}"
+					class="form-control mb-4 col-4" placeholder="Cellulare">
+
+				<!-- Add error message (if present) -->
+				<span th:if="${#fields.hasErrors('cellulare')}"
+					  th:errors="*{cellulare}"
+					  class="badge badge-danger ml-2 mb-4"></span>
+			</div>
+
+			<div class="form-inline">
+				<input type="text" th:field="*{specializzazione}"
+					class="form-control mb-4 col-4" placeholder="Specializzazione">
+			
+				<!-- Add error message (if present) -->
+				<span th:if="${#fields.hasErrors('specializzazione')}"
+					  th:errors="*{specializzazione}"
+					  class="badge badge-danger ml-2 mb-4"></span>
+			</div>
+
+			<button type="submit" class="btn btn-info col-2">Salva</button>
+		</form>
+	
+		<hr>
+		<a th:href="@{/medici/list}">Ritorna alla Lista dei Medici</a>
+		
+	</div>
+
+</body>
+</html>
