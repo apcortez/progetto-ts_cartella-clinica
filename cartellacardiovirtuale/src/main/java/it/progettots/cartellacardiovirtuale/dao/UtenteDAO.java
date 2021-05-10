@@ -7,5 +7,6 @@ public interface UtenteDAO {
     public void salva(Utente utente);
 
 	public Utente findByUsername(String username);
+
     
 }

@@ -14,73 +14,18 @@
 <div class="container">
 	<h3>Medici Directory</h3>
 	<hr>
-	<!-- Add a search form -->
-
-	<form action="#" th:action="@{/medici/cerca}"
-		  method="GET" class="form-inline">	
+	<div th:if="${registrationMedicoSuccess}"class="alert alert-success col-xs-offset-1 col-xs-10">
+		Registrazione avvenuta con successo.
+	</div>
 	
 	<!-- Add a button -->
 	<a th:href="@{/medici/showFormForAdd}"
 		class="btn btn-primary btn-sm mb-3">
 		Aggiungi Medico
 	</a>
-	<input type="search"
-			   name="nome"
-			   placeholder="Nome"
-			   class="form-control-sm ml-5 mr-2 mb-3" />
 
-		<input type="search"
-			   name="cognome"
-			   placeholder="Cognome"
-			   class="form-control-sm mr-2 mb-3" />
+	
 
-		<button type="submit"
-				class="btn btn-success btn-sm mb-3">Cerca</button>
-							   
-	</form>
-	
-	<table class="table table-bordered table-striped">
-		<thead class="thead-dark">
-			<tr>
-				<th>Nome</th>
-				<th>Cognome</th>
-				<th>Codice fiscale</th>
-				<th>Sesso</th>
-				<th>Email</th>
-				<th>Telefono</th>
-				<th>Specializzazione</th>
-				<th>Action</th>
-				
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="tempMedico : ${medici}">
-				<td th:text ="${tempMedico.nome}"/>
-				<td th:text ="${tempMedico.cognome}"/>
-				<td th:text ="${tempMedico.codice_fiscale}"/>
-				<td th:text ="${tempMedico.sesso}"/>
-				<td th:text ="${tempMedico.email}"/>
-				<td th:text ="${tempMedico.cellulare}"/>
-				<td th:text ="${tempMedico.specializzazione}"/>
-			
-				
-				<td>
-					<!-- Add update button/link -->
-					<a th:href="@{/medici/showFormForUpdate(medicoId=${tempMedico.id})}"
-						class="btn btn-info btn-sm">
-						Modifica
-					</a>
-					
-					<!-- Add delete button/link -->
-					<a th:href="@{/medici/elimina(medicoId=${tempMedico.id})}"
-						class="btn btn-danger btn-sm"
-						onclick="if (!(confirm('Sei sicuro di voler eliminare questo medico?'))) return  false">
-						Elimina
-					</a>
-			</tr>
-	
-		</tbody>	
-	</table>
 	<!-- Add a logout button -->
 	<form action="#" th:action="@{/logout}" 
 			   method="POST">
