@@ -1,30 +1,23 @@
 package it.progettots.cartellacardiovirtuale.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-
 @Entity
 @Table(name="anagrafica")
-public class AnagraficaUtente{
-
+public class AnagraficaUtente implements Serializable{
+	
+	@Id
 	@OneToOne
 	@JoinColumn(name="utente_username")
 	private Utente utente;
-	
-	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	@Column(name="utente_username")
-	private String codice_fiscale;
 	
 	@Column(name="nome")
 	private String nome;
@@ -82,6 +75,18 @@ public class AnagraficaUtente{
 		this.cellulare = cellulare;
 		this.data_nascita = data_nascita;
 		this.luogo_nascita = luogo_nascita;
+	}
+
+
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 
