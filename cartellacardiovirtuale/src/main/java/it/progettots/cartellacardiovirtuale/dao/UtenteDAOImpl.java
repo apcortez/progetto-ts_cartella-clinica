@@ -39,7 +39,6 @@ public class UtenteDAOImpl implements UtenteDAO {
 		// get current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		// create the user ... finally LOL
 		currentSession.saveOrUpdate(theUtente);
 	}
 

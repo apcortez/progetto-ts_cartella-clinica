@@ -1,12 +1,7 @@
 package it.progettots.cartellacardiovirtuale.service;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import it.progettots.cartellacardiovirtuale.dao.RuoloDAO;
 import it.progettots.cartellacardiovirtuale.dao.UtenteDAO;
 import it.progettots.cartellacardiovirtuale.entity.AnagraficaUtente;
-import it.progettots.cartellacardiovirtuale.entity.Ruolo;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
 import it.progettots.cartellacardiovirtuale.user.TsUser;
 
@@ -47,7 +41,7 @@ public class UtenteServiceImpl implements UtenteService {
 	public void salva(TsUser tsUser) {
 		Utente utente = new Utente();
 		AnagraficaUtente anagrafica = new AnagraficaUtente();
-		
+		anagrafica.setUtente(utente);
 		anagrafica.setNome(tsUser.getNome());
 		anagrafica.setCognome(tsUser.getCognome()); 
 		anagrafica.setGenere(tsUser.getGenere());
@@ -61,8 +55,8 @@ public class UtenteServiceImpl implements UtenteService {
 		utente.setUsername(tsUser.getUsername());
 		utente.setPassword(passwordEncoder.encode(tsUser.getPassword()));
 		utente.setAnagrafica(anagrafica);
-		utente.setEnabled(1);
-		utente.setRoles(Arrays.asList(ruoloDao.findRuoloByNome("ROLE_PAZIENTE")));
+		utente.setRuolo(ruoloDao.findRuoloByNome("PAZIENTE"));
+//		utente.setRoles(Arrays.asList(ruoloDao.findRuoloByNome("ROLE_PAZIENTE")));
 
 
 		 // save user in the database
@@ -75,7 +69,7 @@ public class UtenteServiceImpl implements UtenteService {
 	public void salvaMedico(TsUser tsUser) {
 		Utente utente = new Utente();
 		AnagraficaUtente anagrafica = new AnagraficaUtente();
-		
+		anagrafica.setUtente(utente);
 		anagrafica.setNome(tsUser.getNome());
 		anagrafica.setCognome(tsUser.getCognome()); 
 		anagrafica.setGenere(tsUser.getGenere());
@@ -89,8 +83,8 @@ public class UtenteServiceImpl implements UtenteService {
 		utente.setUsername(tsUser.getUsername());
 		utente.setPassword(passwordEncoder.encode(tsUser.getPassword()));
 		utente.setAnagrafica(anagrafica);
-		utente.setEnabled(1);
-		utente.setRoles(Arrays.asList(ruoloDao.findRuoloByNome("ROLE_MEDICO")));
+		utente.setRuolo(ruoloDao.findRuoloByNome("MEDICO"));
+//		utente.setRoles(Arrays.asList(ruoloDao.findRuoloByNome("ROLE_MEDICO")));
 
 
 		 // save user in the database
@@ -104,12 +98,13 @@ public class UtenteServiceImpl implements UtenteService {
 		if (utente == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
-		return new org.springframework.security.core.userdetails.User(utente.getUsername(), utente.getPassword(),
-				mapRolesToAuthorities(utente.getRoles()));
-	}
-
-	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Ruolo> collection) {
-		return collection.stream().map(role -> new SimpleGrantedAuthority(role.getNome_ruolo())).collect(Collectors.toList());
+		UserDetails userDetails = User.builder()
+								  .username(utente.getUsername())
+								  .password(utente.getPassword())
+								  .roles(utente.getRuolo().getNome_ruolo())
+								  .build();
+								  
+		return userDetails;
 	}
 
 }
