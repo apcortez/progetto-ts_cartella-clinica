@@ -1,5 +1,7 @@
 package it.progettots.cartellacardiovirtuale.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -105,6 +107,19 @@ public class UtenteServiceImpl implements UtenteService {
 								  .build();
 								  
 		return userDetails;
+	}
+
+	@Override
+	@Transactional
+	public List<Utente> findByRole_Medico() {
+		return utenteDao.findByRole_Medico();
+	}
+
+	@Override
+	@Transactional
+	public void deleteByUsername(String theUsername) {
+		utenteDao.deleteByUsername(theUsername);
+		
 	}
 
 }

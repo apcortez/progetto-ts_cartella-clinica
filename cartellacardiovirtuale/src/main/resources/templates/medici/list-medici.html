@@ -24,7 +24,56 @@
 		Aggiungi Medico
 	</a>
 
+
+
+
 	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Codice Fiscale</th>
+				<th>Nome</th>
+				<th>Cognome</th>
+				<th>Genere</th>
+				<th>Email</th>
+				<th>Cellulare</th>
+				<th>Data di nascita</th>
+				<th>Luogo di nascita</th>
+				<th>Specializzazione</th>
+				<th>Action</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="tempMedico : ${medici}">
+				<td th:text ="${tempMedico.username}"/>
+				<td th:text ="${tempMedico.anagrafica.nome}"/>
+				<td th:text ="${tempMedico.anagrafica.cognome}"/>
+				<td th:text ="${tempMedico.anagrafica.genere}"/>
+				<td th:text ="${tempMedico.anagrafica.email}"/>
+				<td th:text ="${tempMedico.anagrafica.cellulare}"/>
+				<td th:text ="${tempMedico.anagrafica.data_nascita}"/>
+				<td th:text ="${tempMedico.anagrafica.luogo_nascita}"/>
+				<td th:text ="${tempMedico.anagrafica.specializzazione}"/>
+		
+				
+				<td>
+					<!-- Add update button/link -->
+					<a th:href="@{/medici/showFormForUpdate(medicoId=${tempMedico.username})}"
+						class="btn btn-info btn-sm">
+						Modifica
+					</a>
+					
+					<!-- Add delete button/link -->
+					<a th:href="@{/medici/elimina(medicoId=${tempMedico.username})}"
+						class="btn btn-danger btn-sm"
+						onclick="if (!(confirm('Sei sicuro di voler eliminare questo medico?'))) return  false">
+						Elimina
+					</a>
+			</tr>
+	
+		</tbody>	
+	</table>
 
 	<!-- Add a logout button -->
 	<form action="#" th:action="@{/logout}" 
