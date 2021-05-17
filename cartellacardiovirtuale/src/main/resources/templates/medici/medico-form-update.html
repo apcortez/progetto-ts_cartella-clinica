@@ -57,7 +57,7 @@
 					    </div>
 
 						<!-- User name -->
-						<input type="hidden" th:field="*{username}" value="PUT"/>
+						<input type="hidden" th:field="*{username}"/>
 						
 
 						<!-- Password -->
@@ -71,26 +71,37 @@
 							  <li th:each="err : ${#fields.errors('password')}" th:text="'Password ' + ${err}" />
 							</ul>						
 						</div>
-					
+						
+						<!-- Confirm Password -->
+						<div style="margin-bottom: 25px" class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
+							<input type="password" th:field="*{matchingPassword}" placeholder="confirm password (*)" class="form-control" th:errorclass="fieldError" />
+						</div>
+						<div th:if="${#fields.hasErrors('matchingPassword')}"
+							style="margin-bottom: 25px" class="text-danger">
+							<ul>
+							  <li th:each="err : ${#fields.errors('matchingPassword')}" th:text="'Password ' + ${err}" />
+							</ul>						
+						</div>
 						
 						<!-- First name -->
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-							<input type="text" th:field="*{anagrafica.nome}" placeholder="Nome (*)" class="form-control" th:errorclass="fieldError" />
+							<input type="text" th:field="*{nome}" placeholder="Nome (*)" class="form-control" th:errorclass="fieldError" />
 						</div>
-						<div th:if="${#fields.hasErrors('anagrafica.nome')}"
+						<div th:if="${#fields.hasErrors('nome')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('anagrafica.nome')}" th:text="'Nome ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('nome')}" th:text="'Nome ' + ${err}" />
 							</ul>						
 						</div>
 						
 						<!-- Last name -->
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-							<input type="text" th:field="*{anagrafica.cognome}" placeholder="Cognome (*)" class="form-control" th:errorclass="fieldError" />
+							<input type="text" th:field="*{cognome}" placeholder="Cognome (*)" class="form-control" th:errorclass="fieldError" />
 						</div>
-						<div th:if="${#fields.hasErrors('anagrafica.cognome')}"
+						<div th:if="${#fields.hasErrors('cognome')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
 							  <li th:each="err : ${#fields.errors('cognome')}" th:text="'Cognome ' + ${err}" />
@@ -99,56 +110,56 @@
 						
 						<!-- Genere -->
 						<div style="margin-bottom: 25px" class="input-group">
-							<input type="radio" th:field="*{anagrafica.genere}" value="M"/>Maschile
-							<input type="radio" th:field="*{anagrafica.genere}" value="F"/>Femminile
+							<input type="radio" th:field="*{genere}" value="M"/>Maschile
+							<input type="radio" th:field="*{genere}" value="F"/>Femminile
 						</div>
 						
 						<!-- Email -->
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-							<input type="text" th:field="*{anagrafica.email}" placeholder="email (*)" class="form-control" th:errorclass="fieldError" />
+							<input type="text" th:field="*{email}" placeholder="email (*)" class="form-control" th:errorclass="fieldError" />
 						</div>
-						<div th:if="${#fields.hasErrors('anagrafica.email')}"
+						<div th:if="${#fields.hasErrors('email')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('anagrafica.email')}" th:text="'Email ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('email')}" th:text="'Email ' + ${err}" />
 							</ul>						
 						</div>
 						
 						<!-- Cellulare -->
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-							<input type="text" th:field="*{anagrafica.cellulare}" placeholder="Cellulare (*)" class="form-control" th:errorclass="fieldError" />
+							<input type="text" th:field="*{cellulare}" placeholder="Cellulare (*)" class="form-control" th:errorclass="fieldError" />
 						</div>
-						<div th:if="${#fields.hasErrors('anagrafica.cellulare')}"
+						<div th:if="${#fields.hasErrors('cellulare')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('anagrafica.cellulare')}" th:text="'Cellulare ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('cellulare')}" th:text="'Cellulare ' + ${err}" />
 							</ul>						
 						</div>
 						
 						<!-- Data di nascita -->
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-							<input type="text" th:field="*{anagrafica.data_nascita}" placeholder="Data di nascita YYYY-MM-DD(*)" class="form-control" th:errorclass="fieldError" />
+							<input type="text" th:field="*{data_nascita}" placeholder="Data di nascita YYYY-MM-DD(*)" class="form-control" th:errorclass="fieldError" />
 							
 						</div>
-						<div th:if="${#fields.hasErrors('anagrafica.data_nascita')}"
+						<div th:if="${#fields.hasErrors('data_nascita')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('anagrafica.data_nascita')}" th:text="'data_nascita ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('data_nascita')}" th:text="'data_nascita ' + ${err}" />
 							</ul>						
 						</div>
 						
 						<!-- Luogo di nascita -->
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-							<input type="text" th:field="*{anagrafica.luogo_nascita}" placeholder="Luogo di nascita (*)" class="form-control" th:errorclass="fieldError" />
+							<input type="text" th:field="*{luogo_nascita}" placeholder="Luogo di nascita (*)" class="form-control" th:errorclass="fieldError" />
 						</div>
-						<div th:if="${#fields.hasErrors('anagrafica.luogo_nascita')}"
+						<div th:if="${#fields.hasErrors('luogo_nascita')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('anagrafica.luogo_nascita')}" th:text="'luogo_nascita ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('luogo_nascita')}" th:text="'luogo_nascita ' + ${err}" />
 							</ul>						
 						</div>
 						
@@ -156,12 +167,12 @@
 						<!-- Specializzazione -->
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-							<input type="text" th:field="*{anagrafica.specializzazione}" placeholder="Specializzazione (*)" class="form-control" th:errorclass="fieldError" />
+							<input type="text" th:field="*{specializzazione}" placeholder="Specializzazione (*)" class="form-control" th:errorclass="fieldError" />
 						</div>
-						<div th:if="${#fields.hasErrors('anagrafica.specializzazione')}"
+						<div th:if="${#fields.hasErrors('specializzazione')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('anagrafica.specializzazione')}" th:text="'specializzazione ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('specializzazione')}" th:text="'specializzazione ' + ${err}" />
 							</ul>						
 						</div>
 						<!-- Register Button -->

@@ -63,9 +63,10 @@ public class MedicoController {
 													Model theModel) {
 		//get the doctor from the service
 		Utente theMedico = utenteService.findByUsername(theUsername);
-		
+		TsUser theTsMedico = utenteService.updateMedico(theMedico);
+				
 		//set doctor as a model attribute to prepopulate form
-		theModel.addAttribute("medico", theMedico);
+		theModel.addAttribute("medico", theTsMedico);
 		
 		//send over to our form
 		return "medici/medico-form-update";
@@ -114,9 +115,11 @@ public class MedicoController {
 	}
 	
 	
-	@PutMapping("/update")
-	public String updateMedico(@RequestBody Utente theMedico) {
-		utenteService.salvaMedico(theMedico);
+	@PostMapping("/update")
+	public String updateMedico(@Valid @ModelAttribute("tsUser") TsUser theTsUser) {
+		String username = theTsUser.getUsername();
+		logger.info("Processing update for medico: " + username);
+		utenteService.salvaMedico(theTsUser);
 		return "redirect:/medici/list";
 	}
 }

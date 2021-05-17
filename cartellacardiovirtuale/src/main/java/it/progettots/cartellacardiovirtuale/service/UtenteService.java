@@ -19,7 +19,7 @@ public interface UtenteService extends UserDetailsService {
 
 	public void deleteByUsername(String theUsername);
 
-	public void salvaMedico(Utente theMedico);
+	public TsUser updateMedico(Utente theMedico);
 
 
 }
