@@ -1,5 +1,7 @@
 package it.progettots.cartellacardiovirtuale.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -105,6 +107,38 @@ public class UtenteServiceImpl implements UtenteService {
 								  .build();
 								  
 		return userDetails;
+	}
+
+	@Override
+	@Transactional
+	public List<Utente> findByRole_Medico() {
+		return utenteDao.findByRole_Medico();
+	}
+
+	@Override
+	@Transactional
+	public void deleteByUsername(String theUsername) {
+		utenteDao.deleteByUsername(theUsername);
+		
+	}
+
+	@Override
+	@Transactional
+	public TsUser updateMedico(Utente theMedico) {
+		TsUser tsUser = new TsUser();
+		tsUser.setUsername(theMedico.getUsername());
+		tsUser.setPassword(theMedico.getPassword());
+		tsUser.setMatchingPassword(theMedico.getPassword());
+		tsUser.setNome(theMedico.getAnagrafica().getNome());
+		tsUser.setCognome(theMedico.getAnagrafica().getCognome());
+		tsUser.setGenere(theMedico.getAnagrafica().getGenere());
+		tsUser.setEmail(theMedico.getAnagrafica().getEmail());
+		tsUser.setCellulare(theMedico.getAnagrafica().getCellulare());
+		tsUser.setData_nascita(theMedico.getAnagrafica().getData_nascita());
+		tsUser.setLuogo_nascita(theMedico.getAnagrafica().getLuogo_nascita());
+		tsUser.setSpecializzazione(theMedico.getAnagrafica().getSpecializzazione());
+		return tsUser;
+		
 	}
 
 }

@@ -23,7 +23,7 @@ public class Utente{
 	@Column(name="password")
 	private String password;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="role_id")
 	private Ruolo ruolo;
 	

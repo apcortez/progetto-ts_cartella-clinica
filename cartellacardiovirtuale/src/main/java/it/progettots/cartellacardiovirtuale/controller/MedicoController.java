@@ -1,9 +1,10 @@
 package it.progettots.cartellacardiovirtuale.controller;
 
-import org.jboss.logging.Logger;
+import java.util.List;
 
 import javax.validation.Valid;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.progettots.cartellacardiovirtuale.entity.Utente;
 import it.progettots.cartellacardiovirtuale.service.UtenteService;
@@ -41,7 +45,8 @@ public class MedicoController {
 	
 	@GetMapping("/list")
 	public String listMedici(Model theModel) {
-		
+		List<Utente> theMedici = utenteService.findByRole_Medico();
+		theModel.addAttribute("medici", theMedici);
 		
 		return "medici/list-medici";
 	}
@@ -52,6 +57,21 @@ public class MedicoController {
 		
 		return "medici/medico-form";
 	}
+	
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("medicoId") String theUsername,
+													Model theModel) {
+		//get the doctor from the service
+		Utente theMedico = utenteService.findByUsername(theUsername);
+		TsUser theTsMedico = utenteService.updateMedico(theMedico);
+				
+		//set doctor as a model attribute to prepopulate form
+		theModel.addAttribute("medico", theTsMedico);
+		
+		//send over to our form
+		return "medici/medico-form-update";
+	}
+	
 	@PostMapping("/processRegistrazioneForm")
 	public String processRegistrationForm(
 				@Valid @ModelAttribute("tsUser") TsUser theTsUser, 
@@ -82,6 +102,24 @@ public class MedicoController {
         
         logger.info("Successfully created medico: " + username);
         
-        return "medici/list-medici";		
+        return "redirect:/medici/list";		
+	}
+	
+	@GetMapping("/elimina")
+	public String elimina(@RequestParam("medicoId") String theUsername) {
+		//delete the doctor
+		utenteService.deleteByUsername(theUsername);
+		
+		//redirect
+		return "redirect:/medici/list";
+	}
+	
+	
+	@PostMapping("/update")
+	public String updateMedico(@Valid @ModelAttribute("tsUser") TsUser theTsUser) {
+		String username = theTsUser.getUsername();
+		logger.info("Processing update for medico: " + username);
+		utenteService.salvaMedico(theTsUser);
+		return "redirect:/medici/list";
 	}
 }
