@@ -41,10 +41,10 @@ public class TsUser {
 	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
+	@Pattern(regexp = "[0-9]{10}", message="Numero di cellulare non valido.")
 	private String cellulare;
 	
 	@NotNull(message = "is required")
-	//@Size(min = 10, message = "is required")
 	private Date data_nascita;
 	
 	@NotNull(message = "is required")
