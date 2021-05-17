@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -66,7 +68,7 @@ public class MedicoController {
 		theModel.addAttribute("medico", theMedico);
 		
 		//send over to our form
-		return "medici/medico-form";
+		return "medici/medico-form-update";
 	}
 	
 	@PostMapping("/processRegistrazioneForm")
@@ -111,4 +113,10 @@ public class MedicoController {
 		return "redirect:/medici/list";
 	}
 	
+	
+	@PutMapping("/update")
+	public String updateMedico(@RequestBody Utente theMedico) {
+		utenteService.salvaMedico(theMedico);
+		return "redirect:/medici/list";
+	}
 }

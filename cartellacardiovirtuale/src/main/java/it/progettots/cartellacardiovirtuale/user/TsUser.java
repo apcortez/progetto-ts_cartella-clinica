@@ -2,14 +2,18 @@ package it.progettots.cartellacardiovirtuale.user;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import it.progettots.cartellacardiovirtuale.validation.CodiceFiscale;
+import it.progettots.cartellacardiovirtuale.validation.ValidEmail;
 
 public class TsUser {
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+//	@NotNull(message = "is required")
+//	@Pattern(regexp = "^[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]$", message="codice fiscale non valido.")
+	@CodiceFiscale
 	private String username;
 	
 	@NotNull(message = "is required")
@@ -32,8 +36,7 @@ public class TsUser {
 	@Size(min = 1, message = "is required")
 	private String genere;
 	
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
+	@ValidEmail
 	private String email;
 	
 	@NotNull(message = "is required")
@@ -59,7 +62,7 @@ public class TsUser {
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.username = username.toUpperCase();
 	}
 
 	public String getPassword() {

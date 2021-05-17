@@ -73,7 +73,12 @@ public class UtenteDAOImpl implements UtenteDAO {
 		theQuery.executeUpdate();		
 		currentSession.delete(currentSession.get(Utente.class, theUsername));
 	}
-		
 
-	
+	@Override
+	public void update(Utente theMedico) {
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		currentSession.saveOrUpdate(theMedico);
+	}
 }
+		

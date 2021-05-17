@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class AnagraficaUtente implements Serializable{
 	
 	@Id
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne
 	@JoinColumn(name="utente_username")
 	private Utente utente;
 	

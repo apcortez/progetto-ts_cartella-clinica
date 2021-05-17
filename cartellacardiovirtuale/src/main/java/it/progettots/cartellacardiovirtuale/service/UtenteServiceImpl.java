@@ -122,4 +122,11 @@ public class UtenteServiceImpl implements UtenteService {
 		
 	}
 
+	@Override
+	@Transactional
+	public void salvaMedico(Utente theMedico) {
+		utenteDao.update(theMedico);
+		
+	}
+
 }

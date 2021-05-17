@@ -14,5 +14,8 @@ public interface UtenteDAO {
 
 	public void deleteByUsername(String theUsername);
 
+	public void update(Utente theMedico);
+
+
     
 }
