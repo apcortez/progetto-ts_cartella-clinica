@@ -30,6 +30,10 @@ public class Utente{
 	@OneToOne(mappedBy="utente", cascade = CascadeType.ALL)	
 	private AnagraficaUtente anagrafica;
 	
+	@OneToOne(mappedBy="utente",cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH} )
+	private SchedaMedica scheda;
+	
+	
 //	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	@JoinTable(name = "users_roles", 
 //	joinColumns = @JoinColumn(name = "username"), 
@@ -53,11 +57,15 @@ public class Utente{
 		this.anagrafica = anagrafica;
 	}
 
-	public Utente(String username, String password, Ruolo ruolo, AnagraficaUtente anagrafica) {
+	
+
+
+public Utente(String username, String password, Ruolo ruolo, AnagraficaUtente anagrafica, SchedaMedica scheda) {
 		this.username = username;
 		this.password = password;
 		this.ruolo = ruolo;
 		this.anagrafica = anagrafica;
+		this.scheda = scheda;
 	}
 
 
@@ -126,12 +134,23 @@ public class Utente{
 //				+ roles + "]";
 //	}
 
+	
+	
+
+	public SchedaMedica getScheda() {
+		return scheda;
+	}
+
+
+	public void setScheda(SchedaMedica scheda) {
+		this.scheda = scheda;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Utente [username=" + username + ", password=" + password + ", ruolo=" + ruolo + ", anagrafica="
-				+ anagrafica + "]";
+				+ anagrafica + ", scheda=" + scheda + "]";
 	}
 
 
