@@ -51,18 +51,7 @@
 				<td th:text ="${tempPaziente.anagrafica.luogo_nascita}"/>
 
 				
-				<td>
-					<!-- Add update button/link -->
-					<a th:href="@{/pazienti/cartella(pazienteId=${tempPaziente.username})}"
-						class="btn btn-info btn-sm">
-						Cartella
-					</a>
-					
-					<!-- Add delete button/link -->
-					<a th:href="@{/pazienti/elimina(pazienteId=${tempPaziente.username})}"
-						class="btn btn-danger btn-sm">
-						Esporta
-					</a>
+				
 			</tr>
 	
 		</tbody>	

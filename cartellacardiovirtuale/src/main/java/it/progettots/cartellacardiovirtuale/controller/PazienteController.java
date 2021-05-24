@@ -5,6 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -35,7 +37,11 @@ public class PazienteController {
 	
 	@GetMapping("/list")
 	public String listPazienti(Model theModel) {
-		List<Utente> thePazienti = utenteService.findByRole_Medico();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
+		System.out.println(username);
+		List<Utente> thePazienti = utenteService.findByMedicoId(username);
+		theModel.addAttribute("pazienti", thePazienti);
 		return "pazienti/list-pazienti";
 	}
 	

@@ -21,5 +21,7 @@ public interface UtenteService extends UserDetailsService {
 
 	public TsUser updateMedico(Utente theMedico);
 
+	public List<Utente> findByMedicoId(String theUsername);
+
 
 }

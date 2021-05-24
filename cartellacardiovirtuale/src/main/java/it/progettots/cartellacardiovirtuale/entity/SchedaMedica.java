@@ -2,10 +2,12 @@ package it.progettots.cartellacardiovirtuale.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -39,15 +41,16 @@ public class SchedaMedica implements Serializable{
 	@Column(name="circonferenza")
 	private double circonferenza;
 	
-	@Column(name="medico_id")
-	private String medicoId;
+	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="medico_id")
+	private Utente medicoId;
 	
 	public SchedaMedica() {
 		
 	}
 
 	public SchedaMedica(Utente utente, String anamnesi, String motivo_visita, double pressione,
-			double frequenza_cardiaca, double peso, double altezza, double circonferenza, String medicoId) {
+			double frequenza_cardiaca, double peso, double altezza, double circonferenza, Utente medicoId) {
 		this.utente = utente;
 		this.anamnesi = anamnesi;
 		this.motivo_visita = motivo_visita;
@@ -135,11 +138,11 @@ public class SchedaMedica implements Serializable{
 		this.circonferenza = circonferenza;
 	}
 
-	public String getMedicoId() {
+	public Utente getMedicoId() {
 		return medicoId;
 	}
 
-	public void setMedicoId(String medicoId) {
+	public void setMedicoId(Utente medicoId) {
 		this.medicoId = medicoId;
 	}
 

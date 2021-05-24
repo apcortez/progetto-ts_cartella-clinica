@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import it.progettots.cartellacardiovirtuale.dao.RuoloDAO;
 import it.progettots.cartellacardiovirtuale.dao.UtenteDAO;
 import it.progettots.cartellacardiovirtuale.entity.AnagraficaUtente;
+import it.progettots.cartellacardiovirtuale.entity.SchedaMedica;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
 import it.progettots.cartellacardiovirtuale.user.TsUser;
 
@@ -43,6 +44,8 @@ public class UtenteServiceImpl implements UtenteService {
 	public void salva(TsUser tsUser) {
 		Utente utente = new Utente();
 		AnagraficaUtente anagrafica = new AnagraficaUtente();
+		SchedaMedica scheda = new SchedaMedica();
+		scheda.setUtente(utente); 
 		anagrafica.setUtente(utente);
 		anagrafica.setNome(tsUser.getNome());
 		anagrafica.setCognome(tsUser.getCognome()); 
@@ -58,6 +61,8 @@ public class UtenteServiceImpl implements UtenteService {
 		utente.setPassword(passwordEncoder.encode(tsUser.getPassword()));
 		utente.setAnagrafica(anagrafica);
 		utente.setRuolo(ruoloDao.findRuoloByNome("PAZIENTE"));
+		utente.setScheda(scheda);
+		utente.aggiungi(null);
 //		utente.setRoles(Arrays.asList(ruoloDao.findRuoloByNome("ROLE_PAZIENTE")));
 
 
@@ -71,6 +76,7 @@ public class UtenteServiceImpl implements UtenteService {
 	public void salvaMedico(TsUser tsUser) {
 		Utente utente = new Utente();
 		AnagraficaUtente anagrafica = new AnagraficaUtente();
+		
 		anagrafica.setUtente(utente);
 		anagrafica.setNome(tsUser.getNome());
 		anagrafica.setCognome(tsUser.getCognome()); 
@@ -86,6 +92,8 @@ public class UtenteServiceImpl implements UtenteService {
 		utente.setPassword(passwordEncoder.encode(tsUser.getPassword()));
 		utente.setAnagrafica(anagrafica);
 		utente.setRuolo(ruoloDao.findRuoloByNome("MEDICO"));
+		utente.setScheda(null);
+		utente.aggiungi(null);
 //		utente.setRoles(Arrays.asList(ruoloDao.findRuoloByNome("ROLE_MEDICO")));
 
 
@@ -139,6 +147,11 @@ public class UtenteServiceImpl implements UtenteService {
 		tsUser.setSpecializzazione(theMedico.getAnagrafica().getSpecializzazione());
 		return tsUser;
 		
+	}
+
+	@Override
+	public List<Utente> findByMedicoId(String theUsername) {
+		return utenteDao.findByMedicoId(theUsername);
 	}
 
 }

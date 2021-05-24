@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import it.progettots.cartellacardiovirtuale.entity.AnagraficaUtente;
+import it.progettots.cartellacardiovirtuale.entity.SchedaMedica;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
 
 @Repository
@@ -79,6 +80,25 @@ public class UtenteDAOImpl implements UtenteDAO {
 		Session currentSession = entityManager.unwrap(Session.class);
 
 		currentSession.saveOrUpdate(theMedico);
+	}
+
+	@Override
+	public List<Utente> findByMedicoId(String theUsername) {
+		// get the current hibernate session
+				Session currentSession = entityManager.unwrap(Session.class);
+
+				// now retrieve/read from database using username
+				Query<Utente> theQuery = currentSession.createQuery("Select Utente from SchedaMedica inner join Utente where medicoId=:uName", Utente.class);
+				theQuery.setParameter("uName", theUsername);
+//				System.out.println(theQuery);
+				List<Utente> thePazienti = null;
+				try {
+					thePazienti = theQuery.getResultList();
+				} catch (Exception e) {
+					thePazienti = null;
+				}
+
+				return thePazienti;
 	}
 }
 		

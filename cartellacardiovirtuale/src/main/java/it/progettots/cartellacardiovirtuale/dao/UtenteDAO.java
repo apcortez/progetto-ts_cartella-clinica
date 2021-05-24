@@ -16,6 +16,8 @@ public interface UtenteDAO {
 
 	public void update(Utente theMedico);
 
+	public List<Utente> findByMedicoId(String theUsername);
+
 
     
 }
