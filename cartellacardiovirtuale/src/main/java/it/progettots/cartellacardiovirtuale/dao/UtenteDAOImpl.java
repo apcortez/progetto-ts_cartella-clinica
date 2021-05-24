@@ -88,12 +88,14 @@ public class UtenteDAOImpl implements UtenteDAO {
 				Session currentSession = entityManager.unwrap(Session.class);
 
 				// now retrieve/read from database using username
-				Query<Utente> theQuery = currentSession.createQuery("Select Utente from SchedaMedica inner join Utente where medicoId=:uName", Utente.class);
+				//SELECT scheda_medica.utente_username from scheda_medica join utente on utente.username = medico_id where medico_id = "mary";
+				Query<Utente> theQuery = currentSession.createQuery("Select SchedaMedica.utente from SchedaMedica join Utente on Utente.username = SchedaMedica.medicoId where medicoId=:uName", Utente.class);
 				theQuery.setParameter("uName", theUsername);
 //				System.out.println(theQuery);
 				List<Utente> thePazienti = null;
 				try {
 					thePazienti = theQuery.getResultList();
+					System.out.println(thePazienti);
 				} catch (Exception e) {
 					thePazienti = null;
 				}

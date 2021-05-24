@@ -183,6 +183,7 @@ public Utente(String username, String password, Ruolo ruolo, AnagraficaUtente an
 		pazienti.add(tempScheda);
 		tempScheda.setMedicoId(this);
 	}
+	
 	@Override
 	public String toString() {
 		return "Utente [username=" + username + ", password=" + password + ", ruolo=" + ruolo + ", anagrafica="

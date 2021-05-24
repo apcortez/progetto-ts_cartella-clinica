@@ -62,7 +62,6 @@ public class UtenteServiceImpl implements UtenteService {
 		utente.setAnagrafica(anagrafica);
 		utente.setRuolo(ruoloDao.findRuoloByNome("PAZIENTE"));
 		utente.setScheda(scheda);
-		utente.aggiungi(null);
 //		utente.setRoles(Arrays.asList(ruoloDao.findRuoloByNome("ROLE_PAZIENTE")));
 
 
@@ -93,7 +92,6 @@ public class UtenteServiceImpl implements UtenteService {
 		utente.setAnagrafica(anagrafica);
 		utente.setRuolo(ruoloDao.findRuoloByNome("MEDICO"));
 		utente.setScheda(null);
-		utente.aggiungi(null);
 //		utente.setRoles(Arrays.asList(ruoloDao.findRuoloByNome("ROLE_MEDICO")));
 
 
