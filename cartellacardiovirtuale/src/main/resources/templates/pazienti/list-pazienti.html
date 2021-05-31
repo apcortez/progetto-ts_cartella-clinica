@@ -50,8 +50,19 @@
 				<td th:text ="${tempPaziente.anagrafica.data_nascita}"/>
 				<td th:text ="${tempPaziente.anagrafica.luogo_nascita}"/>
 
-				
-				
+					<td>
+					<!-- Add update button/link -->
+					<a th:href="@{/pazienti/scheda(pazienteId=${tempPaziente.username})}"
+						class="btn btn-info btn-sm">
+						Scheda
+					</a>
+					
+					<!-- Add delete button/link -->
+					<a th:href="@{/pazienti/elimina(medicoId=${tempPaziente.username})}"
+						class="btn btn-danger btn-sm"
+						onclick="if (!(confirm('Sei sicuro di voler eliminare questo paziente dalla tua lista?'))) return  false">
+						Elimina
+					</a>
 			</tr>
 	
 		</tbody>	

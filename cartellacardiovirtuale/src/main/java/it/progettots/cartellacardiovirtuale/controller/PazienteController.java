@@ -13,6 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.progettots.cartellacardiovirtuale.entity.Utente;
 import it.progettots.cartellacardiovirtuale.service.UtenteService;
@@ -41,10 +42,21 @@ public class PazienteController {
 		String username = ((UserDetails)principal). getUsername();
 		System.out.println(username);
 		List<Utente> thePazienti = utenteService.findByMedicoId(username);
+		System.out.println(thePazienti.size());
+		for(Utente paziente : thePazienti) {
+			System.out.println("username: "+ paziente.getUsername());
+		}
 		theModel.addAttribute("pazienti", thePazienti);
 		return "pazienti/list-pazienti";
 	}
 	
+	@GetMapping("/elimina")
+	public String elimina(@RequestParam("pazienteId") String theUsername) {
+		//delete the doctor
+		utenteService.deleteByPaziente(theUsername);
+		
+		//redirect
+		return "redirect:/medici/list";
 
-	
+	}	
 }

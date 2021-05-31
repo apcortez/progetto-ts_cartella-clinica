@@ -2,6 +2,7 @@ package it.progettots.cartellacardiovirtuale.dao;
 
 import java.util.List;
 
+import it.progettots.cartellacardiovirtuale.entity.AnagraficaUtente;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
 
 public interface UtenteDAO {
@@ -17,6 +18,9 @@ public interface UtenteDAO {
 	public void update(Utente theMedico);
 
 	public List<Utente> findByMedicoId(String theUsername);
+
+	public void deleteByPaziente(String theUsername);
+
 
 
     

@@ -49,18 +49,6 @@ public class SchedaMedica implements Serializable{
 		
 	}
 
-	public SchedaMedica(Utente utente, String anamnesi, String motivo_visita, double pressione,
-			double frequenza_cardiaca, double peso, double altezza, double circonferenza, Utente medicoId) {
-		this.utente = utente;
-		this.anamnesi = anamnesi;
-		this.motivo_visita = motivo_visita;
-		this.pressione = pressione;
-		this.frequenza_cardiaca = frequenza_cardiaca;
-		this.peso = peso;
-		this.altezza = altezza;
-		this.circonferenza = circonferenza;
-		this.medicoId = medicoId;
-	}
 
 	public SchedaMedica(Utente utente, String anamnesi, String motivo_visita, double pressione,
 			double frequenza_cardiaca, double peso, double altezza, double circonferenza) {
@@ -72,6 +60,7 @@ public class SchedaMedica implements Serializable{
 		this.peso = peso;
 		this.altezza = altezza;
 		this.circonferenza = circonferenza;
+		this.medicoId = null;
 	}
 
 	public Utente getUtente() {

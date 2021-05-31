@@ -1,6 +1,7 @@
 package it.progettots.cartellacardiovirtuale.dao;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +11,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import it.progettots.cartellacardiovirtuale.entity.AnagraficaUtente;
 import it.progettots.cartellacardiovirtuale.entity.SchedaMedica;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
 
@@ -82,25 +82,44 @@ public class UtenteDAOImpl implements UtenteDAO {
 		currentSession.saveOrUpdate(theMedico);
 	}
 
+	
 	@Override
 	public List<Utente> findByMedicoId(String theUsername) {
 		// get the current hibernate session
 				Session currentSession = entityManager.unwrap(Session.class);
-
+				System.out.println(theUsername);
 				// now retrieve/read from database using username
 				//SELECT scheda_medica.utente_username from scheda_medica join utente on utente.username = medico_id where medico_id = "mary";
-				Query<Utente> theQuery = currentSession.createQuery("Select SchedaMedica.utente from SchedaMedica join Utente on Utente.username = SchedaMedica.medicoId where medicoId=:uName", Utente.class);
+				Query<SchedaMedica> theQuery = currentSession.createQuery("from SchedaMedica where medicoId.username=:uName", SchedaMedica.class);
 				theQuery.setParameter("uName", theUsername);
-//				System.out.println(theQuery);
-				List<Utente> thePazienti = null;
+				List<Utente> thePazienti = new ArrayList<>();
+				List<SchedaMedica> theSchedaMedica = null;
 				try {
-					thePazienti = theQuery.getResultList();
-					System.out.println(thePazienti);
+					theSchedaMedica = theQuery.getResultList();
+					for(SchedaMedica n: theSchedaMedica) {
+//						System.out.println("ENTRO: "+ theSchedaMedica.size());
+//						System.out.println("pazienti: " + n.getUtente().getUsername());
+						Utente thePaziente = n.getUtente();
+						thePazienti.add(thePaziente);
+					}
 				} catch (Exception e) {
-					thePazienti = null;
+					theSchedaMedica = null;
 				}
-
+				
 				return thePazienti;
 	}
+
+	@Override
+	public void deleteByPaziente(String theUsername) {
+		
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+//		// delete object with primary key
+		Query theQuery = currentSession.createQuery("update SchedaMedica set medicoId ='' where utente.username =:uName");
+		theQuery.setParameter("uName", theUsername);
+		theQuery.executeUpdate();	
+	}
+
 }
 		

@@ -1,5 +1,6 @@
 package it.progettots.cartellacardiovirtuale.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,6 +151,13 @@ public class UtenteServiceImpl implements UtenteService {
 	@Override
 	public List<Utente> findByMedicoId(String theUsername) {
 		return utenteDao.findByMedicoId(theUsername);
+		
+	}
+
+	@Override
+	public void deleteByPaziente(String theUsername) {
+		utenteDao.deleteByPaziente(theUsername);
+		
 	}
 
 }

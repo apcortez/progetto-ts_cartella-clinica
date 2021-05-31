@@ -1,6 +1,5 @@
 package it.progettots.cartellacardiovirtuale.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,8 +32,8 @@ public class Utente{
 	@OneToOne(mappedBy="utente",cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH} )
 	private SchedaMedica scheda;
 	
-	@OneToMany(mappedBy="medicoId", cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	private List<SchedaMedica> pazienti;
+//	@OneToMany(mappedBy="medicoId", cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//	private List<SchedaMedica> pazienti;
 	
 //	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	@JoinTable(name = "users_roles", 
@@ -76,7 +75,7 @@ public Utente(String username, String password, Ruolo ruolo, AnagraficaUtente an
 		this.ruolo = ruolo;
 		this.anagrafica = anagrafica;
 		this.scheda = scheda;
-		this.pazienti = pazienti;
+//		this.pazienti = pazienti;
 	}
 
 
@@ -134,26 +133,10 @@ public Utente(String username, String password, Ruolo ruolo, AnagraficaUtente an
 
 
 
-//	public Collection<Ruolo> getRoles() {
-//		return roles;
-//	}
-//
-//
-//	public void setRoles(Collection<Ruolo> roles) {
-//		this.roles = roles;
-//	}
-
-
 	public void setAnagrafica(AnagraficaUtente anagrafica) {
 		this.anagrafica = anagrafica;
 	}
 
-
-//	@Override
-//	public String toString() {
-//		return "Utente [username=" + username + ", password=" + password + ", anagrafica=" + anagrafica + ", roles="
-//				+ roles + "]";
-//	}
 
 	public SchedaMedica getScheda() {
 		return scheda;
@@ -165,31 +148,33 @@ public Utente(String username, String password, Ruolo ruolo, AnagraficaUtente an
 	}
 
 
-	public List<SchedaMedica> getPazienti() {
-		return pazienti;
-	}
-
-
-	public void setPazienti(List<SchedaMedica> pazienti) {
-		this.pazienti = pazienti;
-	}
-
-
-	public void aggiungi(SchedaMedica tempScheda) {
-		if(pazienti == null) {
-			pazienti = new ArrayList<>();
-		}
-		
-		pazienti.add(tempScheda);
-		tempScheda.setMedicoId(this);
-	}
-	
 	@Override
 	public String toString() {
 		return "Utente [username=" + username + ", password=" + password + ", ruolo=" + ruolo + ", anagrafica="
-				+ anagrafica + ", scheda=" + scheda + ", pazienti=" + pazienti + "]";
+				+ anagrafica + ", scheda=" + scheda + "]";
 	}
 
+//
+//	public List<SchedaMedica> getPazienti() {
+//		return pazienti;
+//	}
+//
+//
+//	public void setPazienti(List<SchedaMedica> pazienti) {
+//		this.pazienti = pazienti;
+//	}
+//
+//
+//	public void aggiungi(SchedaMedica tempScheda) {
+//		if(pazienti == null) {
+//			pazienti = new ArrayList<>();
+//		}
+//		
+//		pazienti.add(tempScheda);
+//		tempScheda.setMedicoId(this);
+//	}
+	
+	
 	
 
 	

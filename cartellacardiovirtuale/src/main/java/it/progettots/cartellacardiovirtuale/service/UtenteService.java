@@ -23,5 +23,7 @@ public interface UtenteService extends UserDetailsService {
 
 	public List<Utente> findByMedicoId(String theUsername);
 
+	public void deleteByPaziente(String theUsername);
+
 
 }
