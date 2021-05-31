@@ -116,7 +116,7 @@ public class UtenteDAOImpl implements UtenteDAO {
 		Session currentSession = entityManager.unwrap(Session.class);
 		
 //		// delete object with primary key
-		Query theQuery = currentSession.createQuery("update SchedaMedica set medicoId ='' where utente.username =:uName");
+		Query theQuery = currentSession.createQuery("update SchedaMedica set medicoId =null where utente.username =:uName");
 		theQuery.setParameter("uName", theUsername);
 		theQuery.executeUpdate();	
 	}

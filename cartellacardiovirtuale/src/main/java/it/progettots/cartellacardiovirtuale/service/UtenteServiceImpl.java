@@ -149,12 +149,14 @@ public class UtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
+	@Transactional
 	public List<Utente> findByMedicoId(String theUsername) {
 		return utenteDao.findByMedicoId(theUsername);
 		
 	}
 
 	@Override
+	@Transactional
 	public void deleteByPaziente(String theUsername) {
 		utenteDao.deleteByPaziente(theUsername);
 		

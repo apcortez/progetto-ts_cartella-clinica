@@ -56,7 +56,7 @@ public class PazienteController {
 		utenteService.deleteByPaziente(theUsername);
 		
 		//redirect
-		return "redirect:/medici/list";
+		return "redirect:/pazienti/list";
 
 	}	
 }

@@ -58,7 +58,7 @@
 					</a>
 					
 					<!-- Add delete button/link -->
-					<a th:href="@{/pazienti/elimina(medicoId=${tempPaziente.username})}"
+					<a th:href="@{/pazienti/elimina(pazienteId=${tempPaziente.username})}"
 						class="btn btn-danger btn-sm"
 						onclick="if (!(confirm('Sei sicuro di voler eliminare questo paziente dalla tua lista?'))) return  false">
 						Elimina
