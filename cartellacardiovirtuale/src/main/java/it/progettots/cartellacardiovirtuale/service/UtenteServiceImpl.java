@@ -162,4 +162,17 @@ public class UtenteServiceImpl implements UtenteService {
 		
 	}
 
+	@Override
+	@Transactional
+	public void aggiungiPaziente(String theUsername, String medico) {
+		utenteDao.aggiungiPaziente(theUsername, medico);
+		
+	}
+
+	@Override
+	@Transactional
+	public List<Utente> findPazienti() {
+		return utenteDao.findPazienti();
+	}
+
 }

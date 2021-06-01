@@ -121,5 +121,42 @@ public class UtenteDAOImpl implements UtenteDAO {
 		theQuery.executeUpdate();	
 	}
 
+	@Override
+	public void aggiungiPaziente(String theUsername, String medico) {
+		// get the current hibernate session
+				Session currentSession = entityManager.unwrap(Session.class);
+				
+//				// delete object with primary key
+				Query theQuery = currentSession.createQuery("update SchedaMedica set medicoId.username=:mName where utente.username =:uName");
+				theQuery.setParameter("uName", theUsername);
+				theQuery.setParameter("mName", medico);
+				theQuery.executeUpdate();	
+			}
+	
+	
+
+	@Override
+	public List<Utente> findPazienti() {
+		// get the current hibernate session
+				Session currentSession = entityManager.unwrap(Session.class);
+				
+				Query<SchedaMedica> theQuery = currentSession.createQuery("from SchedaMedica where medicoId.username=null", SchedaMedica.class);
+				
+				List<Utente> thePazienti = new ArrayList<>();
+				List<SchedaMedica> theSchedaMedica = null;
+				try {
+					theSchedaMedica = theQuery.getResultList();
+					for(SchedaMedica n: theSchedaMedica) {
+						Utente thePaziente = n.getUtente();
+						thePazienti.add(thePaziente);
+					}
+				} catch (Exception e) {
+					theSchedaMedica = null;
+				}
+				
+				return thePazienti;
+	}
 }
+
+
 		

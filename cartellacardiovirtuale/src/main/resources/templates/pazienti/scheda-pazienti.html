@@ -15,15 +15,6 @@
 	<h3>Pazienti Directory</h3>
 	<hr>
 
-	
-	<!-- Add a button -->
-	<a th:href="@{/pazienti/list2}"
-		class="btn btn-primary btn-sm mb-3">
-		Aggiungi Paziente
-	</a>
-
-
-
 	<table class="table table-bordered table-striped">
 		<thead class="thead-dark">
 			<tr>
@@ -35,7 +26,6 @@
 				<th>Cellulare</th>
 				<th>Data di nascita</th>
 				<th>Luogo di nascita</th>
-				<th>Action</th>
 				
 			</tr>
 		</thead>
@@ -50,19 +40,35 @@
 				<td th:text ="${tempPaziente.anagrafica.data_nascita}"/>
 				<td th:text ="${tempPaziente.anagrafica.luogo_nascita}"/>
 
-					<td>
-					<!-- Add update button/link -->
-					<a th:href="@{/pazienti/scheda(pazienteId=${tempPaziente.username})}"
-						class="btn btn-info btn-sm">
-						Scheda
-					</a>
-					
-					<!-- Add delete button/link -->
-					<a th:href="@{/pazienti/elimina(pazienteId=${tempPaziente.username})}"
-						class="btn btn-danger btn-sm"
-						onclick="if (!(confirm('Sei sicuro di voler eliminare questo paziente dalla tua lista?'))) return  false">
-						Elimina
-					</a>
+				
+			</tr>
+	
+		</tbody>	
+	</table>
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Anamnesi</th>
+				<th>Motivo visita</th>
+				<th>Pressione</th>
+				<th>Frequenza cardiaca</th>
+				<th>Peso</th>
+				<th>Altezza</th>
+				<th>Circonferenza</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="tempScheda : ${schede}">
+				<td th:text ="${tempScheda.anamnesi}"/>
+				<td th:text ="${tempScheda.motivo_visita}"/>
+				<td th:text ="${tempScheda.pressione}"/>
+				<td th:text ="${tempScheda.frequenza_cardiaca}"/>
+				<td th:text ="${tempScheda.peso}"/>
+				<td th:text ="${tempScheda.altezza}"/>
+				<td th:text ="${tempScheda.circonferenza}"/>
+
 			</tr>
 	
 		</tbody>	

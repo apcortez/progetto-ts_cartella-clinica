@@ -40,20 +40,46 @@ public class PazienteController {
 	public String listPazienti(Model theModel) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = ((UserDetails)principal). getUsername();
-		System.out.println(username);
+		
 		List<Utente> thePazienti = utenteService.findByMedicoId(username);
-		System.out.println(thePazienti.size());
+		logger.info("List pazienti  size: "+ thePazienti.size());
 		for(Utente paziente : thePazienti) {
-			System.out.println("username: "+ paziente.getUsername());
+			logger.info("username paziente: "+ paziente.getUsername());
 		}
 		theModel.addAttribute("pazienti", thePazienti);
 		return "pazienti/list-pazienti";
 	}
 	
+	@GetMapping("/list2")
+	public String listPazienti2(Model theModel) {
+		
+		List<Utente> thePazienti = utenteService.findPazienti();
+
+		logger.info("List pazienti  size: "+ thePazienti.size());
+		for(Utente paziente : thePazienti) {
+			logger.info("username paziente: "+ paziente.getUsername());
+		}
+		theModel.addAttribute("pazienti", thePazienti);
+		return "pazienti/add-pazienti";
+	}
+	
+	@GetMapping("/aggiungi")
+	public String aggiungiPaziente(@RequestParam("pazienteId") String theUsername) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String medico = ((UserDetails)principal). getUsername();
+		
+		utenteService.aggiungiPaziente(theUsername, medico);
+		
+		return "redirect:/pazienti/list";
+	}
+	
+	
 	@GetMapping("/elimina")
 	public String elimina(@RequestParam("pazienteId") String theUsername) {
 		//delete the doctor
 		utenteService.deleteByPaziente(theUsername);
+		logger.info("Deleting from list patient id: "+ theUsername);
 		
 		//redirect
 		return "redirect:/pazienti/list";
