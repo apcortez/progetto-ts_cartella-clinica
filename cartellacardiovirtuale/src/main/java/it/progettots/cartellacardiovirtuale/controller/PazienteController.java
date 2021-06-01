@@ -85,4 +85,12 @@ public class PazienteController {
 		return "redirect:/pazienti/list";
 
 	}	
+	
+	@GetMapping("/scheda")
+	public String schedaPaziente(@RequestParam("pazienteId") String theUsername, Model theModel) {
+		
+		Utente thePaziente = utenteService.findByUsername(theUsername);
+		theModel.addAttribute("paziente", thePaziente);
+		return "pazienti/scheda-paziente";
+	}
 }
