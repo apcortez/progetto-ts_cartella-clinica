@@ -27,10 +27,10 @@ public class SchedaMedica implements Serializable{
 	private String motivo_visita;
 	
 	@Column(name="pressione")
-	private double pressione;
+	private int pressione;
 	
 	@Column(name="frequenza_cardiaca")
-	private double frequenza_cardiaca;
+	private int frequenza_cardiaca;
 	
 	@Column(name="peso")
 	private double peso;
@@ -50,8 +50,8 @@ public class SchedaMedica implements Serializable{
 	}
 
 
-	public SchedaMedica(Utente utente, String anamnesi, String motivo_visita, double pressione,
-			double frequenza_cardiaca, double peso, double altezza, double circonferenza) {
+	public SchedaMedica(Utente utente, String anamnesi, String motivo_visita, int pressione,
+			int frequenza_cardiaca, double peso, double altezza, double circonferenza) {
 		this.utente = utente;
 		this.anamnesi = anamnesi;
 		this.motivo_visita = motivo_visita;
@@ -87,19 +87,19 @@ public class SchedaMedica implements Serializable{
 		this.motivo_visita = motivo_visita;
 	}
 
-	public double getPressione() {
+	public int getPressione() {
 		return pressione;
 	}
 
-	public void setPressione(double pressione) {
+	public void setPressione(int pressione) {
 		this.pressione = pressione;
 	}
 
-	public double getFrequenza_cardiaca() {
+	public int getFrequenza_cardiaca() {
 		return frequenza_cardiaca;
 	}
 
-	public void setFrequenza_cardiaca(double frequenza_cardiaca) {
+	public void setFrequenza_cardiaca(int frequenza_cardiaca) {
 		this.frequenza_cardiaca = frequenza_cardiaca;
 	}
 

@@ -45,52 +45,53 @@
 	
 		</tbody>	
 	</table>
-
+	
 			<form>
 		  <div class="form-row">
 		    <div class="form-group col-md-4">
 		      <label for="inputAnamnesi">Anamnesi</label>
-		      <input type="text" readonly class="form-control" id="inputAnamnesi" th:field="*{paziente.scheda.anamnesi}">
+		      <input type="text" class="form-control" id="inputAnamnesi" th:field="*{paziente.scheda.anamnesi}">
 		    </div>
 		  </div>
 		  <div class="form-group col-md-4">
 		    <label for="inputMotivo">Motivo Visita: </label>
-		    <input type="text" readonly class="form-control" id="inputMotivo" th:field="*{paziente.scheda.motivo_visita}">
+		    <input type="text" class="form-control" id="inputMotivo" th:field="*{paziente.scheda.motivo_visita}">
 		  </div>
 		  <div class="form-group col-md-4">
 		    <label for="inputPressione">Pressione: </label>
-		    <input type="text" readonly class="form-control" id="inputPressione" th:field="*{paziente.scheda.pressione}">
+		    <input type="text" class="form-control" id="inputPressione" th:field="*{paziente.scheda.pressione}">
 		  </div>
 		  <div class="form-row">
 		    <div class="form-group col-md-4">
 		      <label for="inputFrequenza">Frequenza cardiaca: </label>
-		      <input type="text" readonly class="form-control" id="inputFrequenza" th:field="*{paziente.scheda.frequenza_cardiaca}">
+		      <input type="text" class="form-control" id="inputFrequenza" th:field="*{paziente.scheda.frequenza_cardiaca}">
 		    </div>
 		    <div class="form-group col-md-4">
 		      <label for="inputPeso">Peso: </label>
-		     <input type="text" readonly class="form-control" id="inputPeso" th:field="*{paziente.scheda.peso}">
+		     <input type="text" class="form-control" id="inputPeso" th:field="*{paziente.scheda.peso}">
 		    </div>
 		    <div class="form-group col-md-4">
 		      <label for="inputAltezza">Altezza: </label>
-		      <input type="text" readonly class="form-control" id="inputAltezza" th:field="*{paziente.scheda.altezza}">
+		      <input type="text" class="form-control" id="inputAltezza" th:field="*{paziente.scheda.altezza}">
 		    </div>
 		  </div>
 			<div class="form-row">
 		    <div class="form-group col-md-4">
 		      <label for="inputCirconferenza">Circonferenza: </label>
-		      	<input type="text" readonly class="form-control" id="inputCirconferenza" th:field="*{paziente.scheda.circonferenza}">
+		      	<input type="text" class="form-control" id="inputCirconferenza" th:field="*{paziente.scheda.circonferenza}">
 		    </div>
 		    </div>
+		     <button type="submit" class="btn btn-primary">Salva</button>
 		
-		</form>
-		<!-- Add a button -->
-			<a th:href="@{/pazienti/modificaScheda(pazienteId=${paziente.username})}"
-				class="btn btn-primary btn-sm mb-3">
-				Modifica
-		</a>
+	
 
-	<div>
-		<a th:href="@{/pazienti/list}">Ritorna al Pazienti Directory</a>
+	
+		<a th:href="@{/pazienti/scheda(pazienteId=${paziente.username})}"
+				class="btn btn-primary">
+				Indietro
+		</a>
+		</form>
+	<div>	
 	</div>
 	
 	<!-- Add a logout button -->

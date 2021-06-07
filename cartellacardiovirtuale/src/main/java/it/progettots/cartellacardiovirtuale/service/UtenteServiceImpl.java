@@ -1,6 +1,5 @@
 package it.progettots.cartellacardiovirtuale.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import it.progettots.cartellacardiovirtuale.dao.UtenteDAO;
 import it.progettots.cartellacardiovirtuale.entity.AnagraficaUtente;
 import it.progettots.cartellacardiovirtuale.entity.SchedaMedica;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
+import it.progettots.cartellacardiovirtuale.user.TsScheda;
 import it.progettots.cartellacardiovirtuale.user.TsUser;
 
 
@@ -146,6 +146,21 @@ public class UtenteServiceImpl implements UtenteService {
 		tsUser.setSpecializzazione(theMedico.getAnagrafica().getSpecializzazione());
 		return tsUser;
 		
+	}
+	
+	@Override
+	@Transactional
+	public TsScheda updateScheda(Utente thePaziente) {
+		TsScheda tsScheda = new TsScheda();
+		tsScheda.setUsername(thePaziente.getUsername());
+		tsScheda.setAnamnesi(thePaziente.getScheda().getAnamnesi());
+		tsScheda.setMotivo_visita(thePaziente.getScheda().getMotivo_visita());
+		tsScheda.setPressione(thePaziente.getScheda().getPressione());
+		tsScheda.setFrequenza_cardiaca(thePaziente.getScheda().getFrequenza_cardiaca());
+		tsScheda.setPeso(thePaziente.getScheda().getPeso());
+		tsScheda.setAltezza(thePaziente.getScheda().getAltezza());
+		tsScheda.setCirconferenza(thePaziente.getScheda().getCirconferenza());
+		return tsScheda;
 	}
 
 	@Override

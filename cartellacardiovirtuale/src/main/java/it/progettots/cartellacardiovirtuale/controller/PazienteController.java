@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.progettots.cartellacardiovirtuale.entity.Utente;
 import it.progettots.cartellacardiovirtuale.service.UtenteService;
+import it.progettots.cartellacardiovirtuale.user.TsUser;
 
 @Controller
 @RequestMapping("/pazienti")
@@ -92,5 +93,19 @@ public class PazienteController {
 		Utente thePaziente = utenteService.findByUsername(theUsername);
 		theModel.addAttribute("paziente", thePaziente);
 		return "pazienti/scheda-paziente";
+	}
+	
+	
+	@GetMapping("/modificaScheda")
+	public String modificaScheda(@RequestParam("pazienteId") String theUsername,
+													Model theModel) {
+		//get the doctor from the service
+		Utente thePaziente = utenteService.findByUsername(theUsername);
+		logger.info("entrato per la modifica scheda paziente" + theUsername);
+		//set doctor as a model attribute to prepopulate form
+		theModel.addAttribute("paziente", thePaziente);
+		
+		//send over to our form
+		return "pazienti/scheda-paziente-form";
 	}
 }

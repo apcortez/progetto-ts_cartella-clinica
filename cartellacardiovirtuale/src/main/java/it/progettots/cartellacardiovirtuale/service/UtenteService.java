@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import it.progettots.cartellacardiovirtuale.entity.Utente;
+import it.progettots.cartellacardiovirtuale.user.TsScheda;
 import it.progettots.cartellacardiovirtuale.user.TsUser;
 
 public interface UtenteService extends UserDetailsService {
@@ -28,6 +29,8 @@ public interface UtenteService extends UserDetailsService {
 	public void aggiungiPaziente(String theUsername, String medico);
 
 	public List<Utente> findPazienti();
+
+	public TsScheda updateScheda(Utente thePaziente);
 
 
 }
