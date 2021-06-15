@@ -29,6 +29,9 @@ public class SchedaMedica implements Serializable{
 	@Column(name="pressione")
 	private int pressione;
 	
+	@Column(name="colesterolo")
+	private int colesterolo;
+	
 	@Column(name="frequenza_cardiaca")
 	private int frequenza_cardiaca;
 	
@@ -41,6 +44,15 @@ public class SchedaMedica implements Serializable{
 	@Column(name="circonferenza")
 	private double circonferenza;
 	
+	@Column(name="diabete")
+	private byte diabete;
+	
+	@Column(name="fumatore")
+	private byte fumatore;
+	
+	@Column(name="fattore_rischio")
+	private int fattore_rischio;
+	
 	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="medico_id")
 	private Utente medicoId;
@@ -50,18 +62,25 @@ public class SchedaMedica implements Serializable{
 	}
 
 
-	public SchedaMedica(Utente utente, String anamnesi, String motivo_visita, int pressione,
-			int frequenza_cardiaca, double peso, double altezza, double circonferenza) {
+	public SchedaMedica(Utente utente, String anamnesi, String motivo_visita, int pressione, int colesterolo,
+			int frequenza_cardiaca, double peso, double altezza, double circonferenza, byte diabete, byte fumatore,
+			int fattore_rischio, Utente medicoId) {
 		this.utente = utente;
 		this.anamnesi = anamnesi;
 		this.motivo_visita = motivo_visita;
 		this.pressione = pressione;
+		this.colesterolo = colesterolo;
 		this.frequenza_cardiaca = frequenza_cardiaca;
 		this.peso = peso;
 		this.altezza = altezza;
 		this.circonferenza = circonferenza;
-		this.medicoId = null;
+		this.diabete = diabete;
+		this.fumatore = fumatore;
+		this.fattore_rischio = fattore_rischio;
+		this.medicoId = medicoId;
 	}
+
+
 
 	public Utente getUtente() {
 		return utente;
@@ -134,13 +153,65 @@ public class SchedaMedica implements Serializable{
 	public void setMedicoId(Utente medicoId) {
 		this.medicoId = medicoId;
 	}
+	
+	
+
+	public int getColesterolo() {
+		return colesterolo;
+	}
+
+
+
+	public void setColesterolo(int colesterolo) {
+		this.colesterolo = colesterolo;
+	}
+
+
+
+	public byte getDiabete() {
+		return diabete;
+	}
+
+
+
+	public void setDiabete(byte diabete) {
+		this.diabete = diabete;
+	}
+
+
+
+	public int getFattore_rischio() {
+		return fattore_rischio;
+	}
+
+
+
+	public void setFattore_rischio(int fattore_rischio) {
+		this.fattore_rischio = fattore_rischio;
+	}
+
+	
+
+	public byte getFumatore() {
+		return fumatore;
+	}
+
+
+	public void setFumatore(byte fumatore) {
+		this.fumatore = fumatore;
+	}
+
 
 	@Override
 	public String toString() {
 		return "SchedaMedica [utente=" + utente + ", anamnesi=" + anamnesi + ", motivo_visita=" + motivo_visita
-				+ ", pressione=" + pressione + ", frequenza_cardiaca=" + frequenza_cardiaca + ", peso=" + peso
-				+ ", altezza=" + altezza + ", circonferenza=" + circonferenza + ", medicoId=" + medicoId + "]";
+				+ ", pressione=" + pressione + ", colesterolo=" + colesterolo + ", frequenza_cardiaca="
+				+ frequenza_cardiaca + ", peso=" + peso + ", altezza=" + altezza + ", circonferenza=" + circonferenza
+				+ ", diabete=" + diabete + ", fumatore=" + fumatore + ", fattore_rischio=" + fattore_rischio
+				+ ", medicoId=" + medicoId + "]";
 	}
+
+
 	
 	
 }

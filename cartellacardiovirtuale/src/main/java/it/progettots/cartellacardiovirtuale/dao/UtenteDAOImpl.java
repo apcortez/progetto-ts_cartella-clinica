@@ -11,14 +11,19 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ch.qos.logback.classic.Logger;
+import it.progettots.cartellacardiovirtuale.entity.Rischio;
 import it.progettots.cartellacardiovirtuale.entity.SchedaMedica;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
+import it.progettots.cartellacardiovirtuale.user.TsScheda;
 
 @Repository
 public class UtenteDAOImpl implements UtenteDAO {
 	
 	@Autowired
 	private EntityManager entityManager;
+	
+	private Logger logger;
 	
 	@Override
 	public Utente findByUsername(String theUsername) {
@@ -156,7 +161,49 @@ public class UtenteDAOImpl implements UtenteDAO {
 				
 				return thePazienti;
 	}
+
+	@Override
+	public Rischio findRischio(TsScheda theTsScheda) {
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		System.out.println("genere : " + theTsScheda.getGenere());
+		System.out.println("col : " + theTsScheda.getColesterolo());
+		System.out.println("diabete : " + theTsScheda.getDiabete());
+		Query<Rischio> theQuery = currentSession.createQuery("from Rischio where sesso=:gender and fumatore=:smoker and diabete=:diabetic and eta_max>:age and pressione_max>:press and colesterolo_max>:col", Rischio.class);
+		theQuery.setParameter("gender", theTsScheda.getGenere());
+		theQuery.setParameter("age", theTsScheda.getEta());
+		theQuery.setParameter("smoker", theTsScheda.getFumatore());
+		theQuery.setParameter("press", theTsScheda.getPressione());
+		theQuery.setParameter("col", theTsScheda.getColesterolo());
+		theQuery.setParameter("diabetic", theTsScheda.getDiabete());
+//		logger.debug(theQuery.toString());
+		Rischio fattore = null;
+		List<Rischio> theList = null;
+		try {
+			theList = theQuery.getResultList();
+//			logger.info(theList.toString());
+			for(Rischio r: theList) {
+				System.out.println("entro ciclo");
+				System.out.println("fattore: "+ r.getFattore_rischio());
+				System.out.println("eta min: " + r.getEta_min());
+				System.out.println("eta john: " + theTsScheda.getEta());
+				if((r.getEta_min()<=theTsScheda.getEta()) && (r.getPressione_min()<=theTsScheda.getPressione())&& (r.getColesterolo_min()<=theTsScheda.getColesterolo())) {
+					System.out.println("fattore preso: " + r.getFattore_rischio());
+					fattore = r;
+					
+				}
+				
+			}
+			}
+		catch (Exception e) {
+			fattore = null;
+		}
+		return fattore;
+	}	
+	
 }
+	
 
 
 		
