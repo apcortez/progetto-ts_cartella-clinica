@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.progettots.cartellacardiovirtuale.entity.Rischio;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
@@ -144,10 +145,18 @@ public class PazienteController {
 	}
 	
 	@PostMapping("/updateScheda")
-	public String updateScheda(@Valid @ModelAttribute("tsScheda") TsScheda theTsScheda) {
+	public String updateScheda(@Valid @ModelAttribute("tsScheda") TsScheda theTsScheda,
+								BindingResult theBindingResult, RedirectAttributes redirectAttrs){
 		String username = theTsScheda.getUsername();
 		logger.info("Processing update for scheda paziente: " + username);
+		
+		redirectAttrs.addAttribute("id", username);
+		// form validation
+		 if (theBindingResult.hasErrors()){
+			 return "redirect:/pazienti/modificaScheda?pazienteId={id}";
+	        }
 		utenteService.salvaScheda(theTsScheda);
-		return "redirect:/pazienti/list";
+		redirectAttrs.addAttribute("id", username);
+		return "redirect:/pazienti/scheda?pazienteId={id}";
 	}
 }
