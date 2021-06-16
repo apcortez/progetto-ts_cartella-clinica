@@ -129,7 +129,12 @@ public class PazienteController {
 		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
 		theTsScheda.setEta(theTsScheda.getData_nascita());
 		Rischio r = utenteService.findRischio(theTsScheda);
-		theTsScheda.setRischio(r.getFattore_rischio());
+		if(r !=null) {
+			theTsScheda.setRischio(r.getFattore_rischio());
+		}
+		else {
+			theTsScheda.setRischio(0);
+		}
 		utenteService.salvaScheda(theTsScheda);
 		logger.info("entrato per la modifica scheda paziente: " + theUsername);
 		theModel.addAttribute("paziente", theTsScheda);
