@@ -16,6 +16,8 @@
 	<hr>
 	<form th:action="@{/pazienti/updateScheda}" 
 						  	   th:object="${paziente}" method="POST">
+						  	   
+						  	   
 	<table class="table table-bordered table-striped">
 		<thead class="thead-dark">
 			<tr>
@@ -50,18 +52,29 @@
 	</table>
 		
 			
-		  <div class="form-row">
+		  
 		    <div class="form-group col-md-4">
-		      <label for="inputAnamnesi">Anamnesi</label>
-		      <input type="text" class="form-control" id="inputAnamnesi" th:field="*{anamnesi}">
+		      <label>Anamnesi</label>
+		      <input type="text" class="form-control" th:field="*{anamnesi}" th:errorclass="fieldError">
 		    </div>
+		 	<div th:if="${#fields.hasErrors('anamnesi')}"
+					style="margin-bottom: 25px" class="text-danger">
+				<ul>
+					<li th:each="err : ${#fields.errors('anamnesi')}" th:text="'Anamnesi ' + ${err}" />
+				</ul>						
+		  	</div>
+		  <div class="form-group col-md-4">
+		    <label>Motivo Visita: </label>
+		    <input type="text" class="form-control" th:field="*{motivo_visita}" th:errorclass="fieldError">
+		  </div>
+		  <div th:if="${#fields.hasErrors('motivo_visita')}"
+					style="margin-bottom: 25px" class="text-danger">
+				<ul>
+					<li th:each="err : ${#fields.errors('motivo_visita')}" th:text="'Motivo visita ' + ${err}" />
+				</ul>						
 		  </div>
 		  <div class="form-group col-md-4">
-		    <label for="inputMotivo">Motivo Visita: </label>
-		    <input type="text" class="form-control" id="inputMotivo" th:field="*{motivo_visita}">
-		  </div>
-		  <div class="form-group col-md-4">
-		    <label for="inputPressione">Pressione: </label>
+		    <label>Pressione: </label>
 		    <input type="text" class="form-control" th:field="*{pressione}" th:errorclass="fieldError" />
 		  </div>
 		  <div th:if="${#fields.hasErrors('pressione')}"
@@ -69,30 +82,60 @@
 							<ul>
 							  <li th:each="err : ${#fields.errors('pressione')}" th:text="'Pressione ' + ${err}" />
 							</ul>						
-						</div>
+		 </div>
 		  <div class="form-group col-md-4">
-		    <label for="inputColesterolo">Colesterolo: </label>
-		    <input type="text" class="form-control" id="inputColesterolo" th:field="*{colesterolo}">
+		    <label>Colesterolo: </label>
+		    <input type="text" class="form-control" th:field="*{colesterolo}" th:errorclass="fieldError">
 		  </div>
-		  <div class="form-row">
-		    <div class="form-group col-md-4">
-		      <label for="inputFrequenza">Frequenza cardiaca: </label>
-		      <input type="text" class="form-control" id="inputFrequenza" th:field="*{frequenza_cardiaca}">
-		    </div>
-		    <div class="form-group col-md-4">
-		      <label for="inputPeso">Peso: </label>
-		     <input type="text" class="form-control" id="inputPeso" th:field="*{peso}">
-		    </div>
-		    <div class="form-group col-md-4">
-		      <label for="inputAltezza">Altezza: </label>
-		      <input type="text" class="form-control" id="inputAltezza" th:field="*{altezza}">
-		    </div>
+		  <div th:if="${#fields.hasErrors('colesterolo')}"
+					style="margin-bottom: 25px" class="text-danger">
+				<ul>
+					<li th:each="err : ${#fields.errors('colesterolo')}" th:text="'Colesterolo ' + ${err}" />
+				</ul>						
 		  </div>
-			<div class="form-row">
+		  
 		    <div class="form-group col-md-4">
-		      <label for="inputCirconferenza">Circonferenza: </label>
-		      	<input type="text" class="form-control" id="inputCirconferenza" th:field="*{circonferenza}">
+		      <label>Frequenza cardiaca: </label>
+		      <input type="text" class="form-control" th:field="*{frequenza_cardiaca}" th:errorclass="fieldError">
 		    </div>
+		    <div th:if="${#fields.hasErrors('frequenza_cardiaca')}"
+					style="margin-bottom: 25px" class="text-danger">
+				<ul>
+					<li th:each="err : ${#fields.errors('freqienza_cardiaca')}" th:text="'Frequenza Cardiaca ' + ${err}" />
+				</ul>						
+		  </div>
+		    <div class="form-group col-md-4">
+		      <label>Peso: </label>
+		     <input type="text" class="form-control" th:field="*{peso}" th:errorclass="fieldError">
+		    </div>
+		    <div th:if="${#fields.hasErrors('peso')}"
+					style="margin-bottom: 25px" class="text-danger">
+				<ul>
+					<li th:each="err : ${#fields.errors('peso')}" th:text="'Peso ' + ${err}" />
+				</ul>						
+		  	</div>
+		    <div class="form-group col-md-4">
+		      <label>Altezza: </label>
+		      <input type="text" class="form-control" th:field="*{altezza}" th:errorclass="fieldError">
+		    </div>
+		    <div th:if="${#fields.hasErrors('altezza')}"
+					style="margin-bottom: 25px" class="text-danger">
+				<ul>
+					<li th:each="err : ${#fields.errors('altezza')}" th:text="'Altezza ' + ${err}" />
+				</ul>						
+		  	</div>
+		
+		    <div class="form-group col-md-4">
+		      <label>Circonferenza: </label>
+		      	<input type="text" class="form-control" th:field="*{circonferenza}" th:errorclass="fieldError">
+		    </div>
+		    <div th:if="${#fields.hasErrors('circonferenza')}"
+					style="margin-bottom: 25px" class="text-danger">
+				<ul>
+					<li th:each="err : ${#fields.errors('circonferenza')}" th:text="'Circonferenza ' + ${err}" />
+				</ul>						
+		  	</div>
+		  	
 		    <div class="form-group col-md-4">
 		    <label for="inputDiabete">Diabetico: </label>
 		    <input type="radio" id="inputDiabete" th:field="*{diabete}" value="1"/>SI
@@ -103,7 +146,7 @@
 		    <input type="radio" id="inputFumatore" th:field="*{fumatore}" value="1"/>SI
 		    <input type="radio" id="inputFumatore" th:field="*{fumatore}" value="0"/>NO
 		 	</div>
-		    </div>
+	
 		     <button type="submit" class="btn btn-primary">Salva</button>
 		
 	

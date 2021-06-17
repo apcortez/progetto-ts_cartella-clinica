@@ -146,17 +146,19 @@ public class PazienteController {
 	
 	@PostMapping("/updateScheda")
 	public String updateScheda(@Valid @ModelAttribute("tsScheda") TsScheda theTsScheda,
-								BindingResult theBindingResult, RedirectAttributes redirectAttrs){
+			BindingResult theBindingResult, RedirectAttributes redirectAttrs, Model theModel){
 		String username = theTsScheda.getUsername();
 		logger.info("Processing update for scheda paziente: " + username);
 		
+		theModel.addAttribute("paziente", theTsScheda);
 		redirectAttrs.addAttribute("id", username);
+		
 		// form validation
 		 if (theBindingResult.hasErrors()){
-			 return "redirect:/pazienti/modificaScheda?pazienteId={id}";
+			 return "pazienti/scheda-paziente-form";
 	        }
 		utenteService.salvaScheda(theTsScheda);
-		redirectAttrs.addAttribute("id", username);
+		
 		return "redirect:/pazienti/scheda?pazienteId={id}";
 	}
 }

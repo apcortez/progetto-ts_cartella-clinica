@@ -24,32 +24,32 @@ public class TsScheda {
 
 	private String motivo_visita;
 	
-	@NotNull(message = "is required")
-	@Max(300)
-	@Min(90)
+	@Min(value=90, message="pressione sistolica deve essere compresa tra 90 e 200 mmHg")
+	@Max(value=250, message="pressione sistolica deve essere compresa tra 90 e 200 mmHg")
 	private int pressione;
 	
-	@NotNull(message = "is required")
-	@Max(350)
-	@Min(130)
+	
+	@Min(value=130, message="colesterolo totale deve essere compreso tra 130 e 320 mg/dl")
+	@Max(value=350, message="colesterolo totale deve essere compreso tra 130 e 320 mg/dl")
 	private int colesterolo;
 	
-	@NotNull(message = "is required")
-	@Max(200)
+
+	
 	@Min(50)
+	@Max(200)
 	private int frequenza_cardiaca;
 	
-	@NotNull(message = "is required")
+	
 	@Max(200)
 	private double peso;
 	
-	@NotNull(message = "is required")
+	@Min(100)
 	private double altezza;
 	
-	@NotNull(message = "is required")
+	
 	private double circonferenza;
 	
-	@NotNull(message = "is required")
+	
 	private byte diabete;
 	
 	
@@ -57,7 +57,7 @@ public class TsScheda {
 	
 	private int eta;
 
-	@NotNull(message = "is required")
+	
 	private byte fumatore;
 	
 	public TsScheda() {
