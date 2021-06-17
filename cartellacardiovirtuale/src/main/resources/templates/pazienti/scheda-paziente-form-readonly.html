@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	
+	<title>Scheda Paziente</title>
+</head>
+<body>
+<div class="container">
+	<h3>Scheda Medica</h3>
+	<hr>
+	<form th:action="@{/pazienti/updateScheda}" 
+						  	   th:object="${paziente}" method="POST">
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Codice Fiscale</th>
+				<th>Nome</th>
+				<th>Cognome</th>
+				<th>Genere</th>
+				<th>Email</th>
+				<th>Cellulare</th>
+				<th>Data di nascita</th>
+				<th>Luogo di nascita</th>
+				<th>Rischio Cardiologico</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="text" readonly class="form-control-plaintext" th:field="*{username}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:field="*{nome}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:field="*{cognome}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:field="*{genere}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:field="*{email}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:field="*{cellulare}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:field="*{data_nascita}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:field="*{luogo_nascita}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:field="*{rischio}"></td>
+				
+			</tr>
+	
+		</tbody>	
+	</table>
+	
+			
+		  <div class="form-row">
+		    <div class="form-group col-md-4">
+		      <label for="inputAnamnesi">Anamnesi</label>
+		      <input type="text" readonly class="form-control" id="inputAnamnesi" th:field="*{anamnesi}">
+		    </div>
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="inputMotivo">Motivo Visita: </label>
+		    <input type="text" readonly class="form-control" id="inputMotivo" th:field="*{motivo_visita}">
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="inputPressione">Pressione: </label>
+		    <input type="text" readonly class="form-control" id="inputPressione" th:field="*{pressione}">
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="inputColesterolo">Colesterolo: </label>
+		    <input type="text" readonly class="form-control" id="inputColesterolo" th:field="*{colesterolo}">
+		  </div>
+		  <div class="form-row">
+		    <div class="form-group col-md-4">
+		      <label for="inputFrequenza">Frequenza cardiaca: </label>
+		      <input type="text" readonly class="form-control" id="inputFrequenza" th:field="*{frequenza_cardiaca}">
+		    </div>
+		    <div class="form-group col-md-4">
+		      <label for="inputPeso">Peso: </label>
+		     <input type="text" readonly class="form-control" id="inputPeso" th:field="*{peso}">
+		    </div>
+		    <div class="form-group col-md-4">
+		      <label for="inputAltezza">Altezza: </label>
+		      <input type="text" readonly class="form-control" id="inputAltezza" th:field="*{altezza}">
+		    </div>
+		  </div>
+			<div class="form-row">
+		    <div class="form-group col-md-4">
+		      <label for="inputCirconferenza">Circonferenza: </label>
+		      	<input type="text" readonly class="form-control" id="inputCirconferenza" th:field="*{circonferenza}">
+		    </div>
+		    <div class="form-group col-md-4">
+		    <label for="inputDiabete">Diabetico: </label>
+		    <input type="radio" readonly id="inputDiabete" th:field="*{diabete}" value="1"/>SI
+		    <input type="radio" readonly id="inputDiabete" th:field="*{diabete}" value="0"/>NO
+		 	</div>
+		 	<div class="form-group col-md-4">
+		    <label for="inputFumatore">Fumatore: </label>
+		    <input type="radio" readonly id="inputFumatore" th:field="*{fumatore}" value="1"/>SI
+		    <input type="radio" readonly id="inputFumatore" th:field="*{fumatore}" value="0"/>NO
+		 	</div>
+		    </div>
+	
+	
+		</form>
+		<!-- Add a button -->
+			<a th:href="@{/pazienti/modificaScheda(pazienteId=${paziente.username})}"
+				class="btn btn-primary">
+				Modifica
+		</a>
+			<a th:href="@{/pazienti/calcolaRischio(pazienteId=${paziente.username})}"
+				class="btn btn-primary">
+				Calcola Rischio
+		</a>
+	<div>
+		<a th:href="@{/pazienti/list}"
+			class="btn btn-primary">Indietro</a>
+	</div>
+	
+	<!-- Add a logout button -->
+	<form action="#" th:action="@{/logout}" 
+			   method="POST">
+	
+		<input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+	
+	</form>
+</div>	
+</body>
+
+
+
+</html>

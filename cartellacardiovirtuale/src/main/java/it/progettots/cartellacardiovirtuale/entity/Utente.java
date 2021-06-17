@@ -1,14 +1,13 @@
 package it.progettots.cartellacardiovirtuale.entity;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,6 +29,12 @@ public class Utente{
 	@OneToOne(mappedBy="utente", cascade = CascadeType.ALL)	
 	private AnagraficaUtente anagrafica;
 	
+	@OneToOne(mappedBy="utente",cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH} )
+	private SchedaMedica scheda;
+	
+//	@OneToMany(mappedBy="medicoId", cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//	private List<SchedaMedica> pazienti;
+	
 //	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	@JoinTable(name = "users_roles", 
 //	joinColumns = @JoinColumn(name = "username"), 
@@ -40,6 +45,11 @@ public class Utente{
 	public Utente() {
 		
 	}
+
+	
+	public Utente(String username) {
+	this.username = username;
+}
 
 
 	public Utente(String username, String password) {
@@ -53,11 +63,29 @@ public class Utente{
 		this.anagrafica = anagrafica;
 	}
 
-	public Utente(String username, String password, Ruolo ruolo, AnagraficaUtente anagrafica) {
+	
+	
+
+
+
+public Utente(String username, String password, Ruolo ruolo, AnagraficaUtente anagrafica, SchedaMedica scheda,
+			List<SchedaMedica> pazienti) {
 		this.username = username;
 		this.password = password;
 		this.ruolo = ruolo;
 		this.anagrafica = anagrafica;
+		this.scheda = scheda;
+//		this.pazienti = pazienti;
+	}
+
+
+public Utente(String username, String password, Ruolo ruolo, AnagraficaUtente anagrafica,
+			SchedaMedica scheda) {
+		this.username = username;
+		this.password = password;
+		this.ruolo = ruolo;
+		this.anagrafica = anagrafica;
+		this.scheda = scheda;
 	}
 
 
@@ -105,37 +133,48 @@ public class Utente{
 
 
 
-//	public Collection<Ruolo> getRoles() {
-//		return roles;
-//	}
-//
-//
-//	public void setRoles(Collection<Ruolo> roles) {
-//		this.roles = roles;
-//	}
-
-
 	public void setAnagrafica(AnagraficaUtente anagrafica) {
 		this.anagrafica = anagrafica;
 	}
 
 
-//	@Override
-//	public String toString() {
-//		return "Utente [username=" + username + ", password=" + password + ", anagrafica=" + anagrafica + ", roles="
-//				+ roles + "]";
-//	}
+	public SchedaMedica getScheda() {
+		return scheda;
+	}
 
+
+	public void setScheda(SchedaMedica scheda) {
+		this.scheda = scheda;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Utente [username=" + username + ", password=" + password + ", ruolo=" + ruolo + ", anagrafica="
-				+ anagrafica + "]";
+				+ anagrafica + ", scheda=" + scheda + "]";
 	}
 
-
-
+//
+//	public List<SchedaMedica> getPazienti() {
+//		return pazienti;
+//	}
+//
+//
+//	public void setPazienti(List<SchedaMedica> pazienti) {
+//		this.pazienti = pazienti;
+//	}
+//
+//
+//	public void aggiungi(SchedaMedica tempScheda) {
+//		if(pazienti == null) {
+//			pazienti = new ArrayList<>();
+//		}
+//		
+//		pazienti.add(tempScheda);
+//		tempScheda.setMedicoId(this);
+//	}
+	
+	
 	
 
 	
