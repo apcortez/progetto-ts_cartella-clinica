@@ -99,6 +99,13 @@
 	
 	
 		</form>
+		 <form th:action="@{/files/uploadMultipleFiles(username=${paziente.username})}" 
+						  	   th:object="${files}" method="POST" enctype="multipart/form-data">
+         <input type="file" name="files" multiple><br>
+         <input type="submit" value="Carica" class="btn btn-primary">
+      </form>
+
+      	<br>
 		<!-- Add a button -->
 			<a th:href="@{/pazienti/modificaScheda(pazienteId=${paziente.username})}"
 				class="btn btn-primary">
@@ -108,10 +115,12 @@
 				class="btn btn-primary">
 				Calcola Rischio
 		</a>
+	
 	<div>
 		<a th:href="@{/pazienti/list}"
 			class="btn btn-primary">Indietro</a>
 	</div>
+		 
 	
 	<!-- Add a logout button -->
 	<form action="#" th:action="@{/logout}" 

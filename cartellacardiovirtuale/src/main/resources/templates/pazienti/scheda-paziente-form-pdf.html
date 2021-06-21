@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+	<title>Scheda Paziente</title>
+</head>
+<body th:object="${paziente}">
+<div class="container">
+	<h3>Scheda Medicass</h3>
+	<hr>
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Codice Fiscale</th>
+				<th>Nome</th>
+				<th>Cognome</th>
+				<th>Genere</th>
+				<th>Email</th>
+				<th>Cellulare</th>
+				<th>Data di nascita</th>
+				<th>Luogo di nascita</th>
+				<th>Rischio Cardiologico</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="text" readonly class="form-control-plaintext" th:utext="*{username}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:utext="*{nome}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:utext="*{cognome}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:utext="*{genere}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:utext="*{email}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:utext="*{cellulare}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:utext="*{data_nascita}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:utext="*{luogo_nascita}"></td>
+				<td><input type="text" readonly class="form-control-plaintext" th:utext="*{rischio}"></td>
+
+			</tr>
+
+		</tbody>
+	</table>
+
+
+		  <div class="form-row">
+		    <div class="form-group col-md-4">
+		      <label for="inputAnamnesi">Anamnesi</label>
+		      <b><span id="inputAnamnesi" th:utext="*{anamnesi}"/></b>
+		    </div>
+		  </div>
+		  <div class="form-row">
+		    <div class="form-group col-md-4">
+		      <label for="inputAnamnesi">Anamnesi : </label>
+		      <b><span type="text" readonly  id="inputAnamnesi" th:utext="*{anamnesi}"/></b>
+		    </div>
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="inputMotivo">Motivo Visita: </label>
+		    <b><span id="inputMotivo" th:utext="*{motivo_visita}"/></b>
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="inputPressione">Pressione: </label>
+		    <b><span id="inputPressione" th:utext="*{pressione}"/></b>
+		  </div>
+		  <div class="form-group col-md-4">
+		    <label for="inputColesterolo">Colesterolo: </label>
+		    <b><span id="inputColesterolo" th:utext="*{colesterolo}"/></b>
+		  </div>
+		  <div class="form-row">
+		    <div class="form-group col-md-4">
+		      <label for="inputFrequenza">Frequenza cardiaca: </label>
+		      <b><span id="inputFrequenza" th:utext="*{frequenza_cardiaca}"/></b>
+		    </div>
+		    <div class="form-group col-md-4">
+		      <label for="inputPeso">Peso: </label>
+		     <b><span id="inputPeso" th:utext="*{peso}"/></b>
+		    </div>
+		    <div class="form-group col-md-4">
+		      <label for="inputAltezza">Altezza: </label>
+		      <b><span id="inputAltezza" th:utext="*{altezza}"/></b>
+		    </div>
+		  </div>
+			<div class="form-row">
+		    <div class="form-group col-md-4">
+		      <label for="inputCirconferenza">Circonferenza: </label>
+		      	<b><span id="inputCirconferenza" th:utext="*{circonferenza}"/><b>
+		    </div>
+		    <div class="form-group col-md-4">
+		    <label for="inputDiabete">Diabetico: </label>
+		    <input type="radio" readonly id="inputDiabete" th:utext="*{diabete}" value="1" />SI
+		    <input type="radio" readonly id="inputDiabete" th:utext="*{diabete}" value="0" />NO
+		 	</div>
+		 	<div class="form-group col-md-4">
+		    <label for="inputFumatore">Fumatore: </label>
+		    <input type="radio" readonly id="inputFumatore" th:utext="*{fumatore}" value="1" />SI
+		    <input type="radio" readonly id="inputFumatore" th:utext="*{fumatore}" value="0" />NO
+		 	</div>
+		    </div>
+
+
+		<div th:each="file : ${images}">
+		<img th:src="@{${'/files/imageDisplay?id='+file.id}}" width="300"/> 
+		  
+					</div>
+					
+					
+		<a th:href="@{${'/files/pdf?username='+paziente.username}}"
+				class="btn btn-primary">
+				EXPORT
+		</a>
+</div>
+</body>
+
+
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Bootstrap CSS -->
+<link
+	th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css}"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous" >
+</link>
+<title>Scheda Paziente</title>
+</head>
+<body >
+	<div class="container" >
+		<h3>Scheda Medica</h3>
+		
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Codice Fiscale</th>
+					<th>Nome</th>
+					<th>Cognome</th>
+					<th>Genere</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td><span type="text" class="form-control-plaintext"
+						th:utext="${paziente.username}" /></td>
+					<td><span type="text" class="form-control-plaintext"
+						th:utext="${paziente.nome}" /></td>
+					<td><span type="text" class="form-control-plaintext"
+						th:utext="${paziente.cognome}" /></td>
+					<td><span type="text" class="form-control-plaintext"
+						th:utext="${paziente.genere}" /></td>
+					
+
+
+				</tr>
+
+			</tbody>
+		</table>
+
+<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+
+					<th>Email</th>
+					<th>Cellulare</th>
+					<th>Data di nascita</th>
+					<th>Luogo di nascita</th>
+					<th>Rischio Cardiologico</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+
+					<td><span type="text" class="form-control-plaintext"
+						th:utext="${paziente.email}" /></td>
+					<td><span type="text" class="form-control-plaintext"
+						th:utext="${paziente.cellulare}" /></td>
+					<td><span type="text" class="form-control-plaintext"
+						th:utext="${paziente.data_nascita}" /></td>
+					<td><span type="text" class="form-control-plaintext"
+						th:utext="${paziente.luogo_nascita}" /></td>
+					<td><span type="text" class="form-control-plaintext"
+						th:utext="${paziente.rischio}" /></td>
+
+
+				</tr>
+
+			</tbody>
+		</table>
+		
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<label for="inputAnamnesi">Anamnesi: </label> <b><span
+					type="text"   id="inputAnamnesi" th:utext="${paziente.anamnesi}"/></b>
+			</div>
+		</div>
+		<div class="form-group col-md-4">
+			<label for="inputMotivo">Motivo Visita: </label> <b><span
+				id="inputMotivo" th:utext="${paziente.motivo_visita}" /></b>
+		</div>
+		<div class="form-group col-md-4">
+			<label for="inputPressione">Pressione: </label> <b><span
+				id="inputPressione" th:utext="${paziente.pressione}" /></b>
+		</div>
+		<div class="form-group col-md-4">
+			<label for="inputColesterolo">Colesterolo: </label> <b><span
+				id="inputColesterolo" th:utext="${paziente.colesterolo}" /></b>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<label for="inputFrequenza">Frequenza cardiaca: </label> <b><span
+					id="inputFrequenza" th:utext="${paziente.frequenza_cardiaca}" /></b>
+			</div>
+			<div class="form-group col-md-4">
+				<label for="inputPeso">Peso: </label> <b><span id="inputPeso"
+					th:utext="${paziente.peso}" /></b>
+			</div>
+			<div class="form-group col-md-4">
+				<label for="inputAltezza">Altezza: </label> <b><span
+					id="inputAltezza" th:utext="${paziente.altezza}" /></b>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<label for="inputCirconferenza">Circonferenza: </label> <span
+					id="inputCirconferenza" th:utext="${paziente.circonferenza}" />
+			</div>
+			<div class="form-group col-md-4">
+				<label for="inputDiabete">Diabetico: </label> 
+			<b>	<span
+					id="inputCirconferenza" th:utext="${diabete}" /></b>
+			</div>
+			<div class="form-group col-md-4">
+				<label for="inputFumatore">Fumatore: </label><b> <span
+					id="inputCirconferenza" th:utext="${fumatore}" />
+			</div>
+		</div>
+
+		
+	</div>
+</body>
+</html>
