@@ -55,4 +55,8 @@ public class DBFileStorageService {
 
 		return dbFileRepository.findPDFBySchedaMedica(schedaMedicaDAO.findByUtente(username));
 	}
+
+	public void removeFile(String fileId) {
+		dbFileRepository.delete(dbFileRepository.getOne(fileId));
+	}
 }

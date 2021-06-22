@@ -13,7 +13,7 @@ import it.progettots.cartellacardiovirtuale.entity.SchedaMedica;
 
 @Repository
 public interface DBFileRepository extends JpaRepository<DBFile, String> {
-	@Query("select f from DBFile f where schedaMedica=:schedaMedica and fileType='image/jpeg'")
+	@Query("select f from DBFile f where schedaMedica=:schedaMedica and fileType in ('image/jpeg','image/gif','image/png')")
 List<DBFile> findBySchedaMedica(@Param("schedaMedica") SchedaMedica schedaMedica);
 	@Query("select f from DBFile f where schedaMedica=:schedaMedica and fileType='application/pdf'")
 List<DBFile> findPDFBySchedaMedica(@Param("schedaMedica") SchedaMedica schedaMedica);

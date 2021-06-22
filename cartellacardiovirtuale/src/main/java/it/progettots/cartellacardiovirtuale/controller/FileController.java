@@ -159,7 +159,12 @@ public class FileController {
 		return pazienteController.listPazienti(theModel);
 
 	}
-
+	@GetMapping("/deleteFile")
+	public String deleteFile(@RequestParam("fileId") String fileId,@RequestParam("username") String username,Model theModel) {
+        dbFileStorageService.removeFile(fileId);
+        return pazienteController.schedaPazientePDF(username, theModel);
+       
+	}
 	private static String htmlToXhtml(String html) {
 	    Document document = Jsoup.parse(html);
 	    document.outputSettings().syntax(Document.OutputSettings.Syntax.xml);

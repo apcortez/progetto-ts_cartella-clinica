@@ -79,11 +79,17 @@ private DBFileRepository dbFileRepo;
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(dest));
             document.open();
+            int indentation = 0;
             for(DBFile file:dbfiles) {
             
             	Image img = Image.getInstance(file.getData());
-                document.setPageSize(img);
-                document.newPage();
+            	float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
+                        - document.rightMargin() - indentation) / img.getWidth()) * 100;
+
+         img.scalePercent(scaler);
+            	
+            	document.setPageSize(PageSize.A4 );
+                document.newPage(); 
                 img.setAbsolutePosition(0, 0);
                 document.add(img);
       
