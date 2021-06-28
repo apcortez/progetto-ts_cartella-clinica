@@ -2,6 +2,7 @@ package it.progettots.cartellacardiovirtuale.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
 import org.jboss.logging.Logger;
@@ -19,22 +20,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.progettots.cartellacardiovirtuale.entity.Rischio;
 import it.progettots.cartellacardiovirtuale.entity.Utente;
+import it.progettots.cartellacardiovirtuale.service.DBFileStorageService;
 import it.progettots.cartellacardiovirtuale.service.UtenteService;
 import it.progettots.cartellacardiovirtuale.user.TsScheda;
 
 @Controller
 @RequestMapping("/pazienti")
-public class PazienteController {
+public class PazienteController implements ServletContextAware{
 	
 	@Autowired
 	private UtenteService utenteService;
-	
+	@Autowired
+	DBFileStorageService fileService;
 	private Logger logger = Logger.getLogger(getClass().getName());
-	
+	private ServletContext servletContext;
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
 		
@@ -96,12 +100,13 @@ public class PazienteController {
 	
 	@GetMapping("/scheda")
 	public String schedaPaziente(@RequestParam("pazienteId") String theUsername, Model theModel) {
-		
 		Utente thePaziente = utenteService.findByUsername(theUsername);
 		logger.info("entro modifica scheda");
 		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
 		logger.info("entrato per la modifica scheda paziente: " + theUsername);
 		theModel.addAttribute("paziente", theTsScheda);
+		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
+		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
 		
 		return "pazienti/scheda-paziente-form-readonly";
 	}
@@ -116,7 +121,8 @@ public class PazienteController {
 		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
 		logger.info("entrato per la modifica scheda paziente: " + theUsername);
 		theModel.addAttribute("paziente", theTsScheda);
-		
+		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
+		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
 		//send over to our form
 		return "pazienti/scheda-paziente-form";
 	}
@@ -139,7 +145,8 @@ public class PazienteController {
 		utenteService.salvaScheda(theTsScheda);
 		logger.info("entrato per la modifica scheda paziente: " + theUsername);
 		theModel.addAttribute("paziente", theTsScheda);
-		
+		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
+		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
 		//send over to our form
 		return "pazienti/scheda-paziente-form-readonly";
 	}
@@ -161,4 +168,24 @@ public class PazienteController {
 		
 		return "redirect:/pazienti/scheda?pazienteId={id}";
 	}
+
+	
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		// TODO Auto-generated method stub
+		this.servletContext = servletContext;
+	} 
+	    
+//	@GetMapping("/schedaPDF")
+//	public String schedaPazientePDF(@RequestParam("pazienteId") String theUsername, Model theModel) {
+//		logger.info("HELLO SCHEDA PDF");
+//		Utente thePaziente = utenteService.findByUsername(theUsername);
+//		logger.info("entro modifica scheda");
+//		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
+//		logger.info("entrato per la modifica scheda paziente: " + theUsername);
+//		theModel.addAttribute("paziente", theTsScheda);
+//		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
+//		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
+//		return "pazienti/scheda-paziente-form-pdf";
+//	}
 }

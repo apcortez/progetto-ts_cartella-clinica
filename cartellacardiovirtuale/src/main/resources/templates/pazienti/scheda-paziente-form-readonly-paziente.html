@@ -18,8 +18,21 @@
 	<div class="container">
 		<h3>Scheda Medica</h3>
 		<hr>
-		<form th:action="@{/pazienti/updateScheda}" th:object="${paziente}"
+		<form th:action="@{/utente/Scheda}" th:object="${paziente}"
 			method="POST">
+			
+			 <div class="form-group">
+					        <div class="col-xs-15">
+					            <div>
+									
+									<!-- Check for pdf export -->
+									<div th:if="${pdfExportSuccess}"class="alert alert-success col-xs-offset-1 col-xs-10">
+										Esportazione avvenuta con successo.
+									</div>
+					            </div>
+					        </div>
+					    </div>
+			
 			<table class="table table-bordered table-striped">
 				<thead class="thead-dark">
 					<tr>
@@ -127,23 +140,12 @@
 		</div>
 
 		</form>
-		<form
-			th:action="@{/files/uploadMultipleFiles(username=${paziente.username})}"
-			th:object="${files}" method="POST" enctype="multipart/form-data">
-			<input type="file" name="files" multiple><br>
-			<input type="submit" value="Carica" class="btn btn-primary">
-		</form><br>
+		
 		<!-- Add a button -->
 		<a
-			th:href="@{/pazienti/modificaScheda(pazienteId=${paziente.username})}"
-			class="btn btn-primary"> Modifica </a> <a
-			th:href="@{/pazienti/calcolaRischio(pazienteId=${paziente.username})}"
-			class="btn btn-primary"> Calcola Rischio </a> <a
-			th:href="@{${'/files/pdf?username='+paziente.username}}"
+			th:href="@{${'/files/pdfUtente?username='+paziente.username}}"
 			class="btn btn-primary"> Esporta </a>
-		<div>
-			<a th:href="@{/pazienti/list}" class="btn btn-primary">Indietro</a>
-		</div>
+		
 
 
 
