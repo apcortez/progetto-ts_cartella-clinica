@@ -149,10 +149,20 @@
 	
 		     <button type="submit" class="btn btn-primary">Salva</button>
 		
-	
+		<div th:each="file : ${images}">
+			<img th:src="@{${'/files/imageDisplay?id='+file.id}}" width="300" />
+			<a
+				th:href="@{${'/files/deleteFile?username='+paziente.username+'&fileId='+file.id}}"
+				class="btn btn-danger"> X </a>
 
-	
-	
+		</div>
+		<div th:each="file : ${documents}">
+			<span type="text" class="form-control-plaintext"
+				th:utext="${file.fileName}"></span> <a
+				th:href="@{${'/files/deleteFile?username='+paziente.username+'&fileId='+file.id}}"
+				class="btn btn-danger"> X </a>
+
+		</div>
 		</form>
 	<div>	<a th:href="@{/pazienti/scheda(pazienteId=${paziente.username})}"
 				class="btn btn-primary">

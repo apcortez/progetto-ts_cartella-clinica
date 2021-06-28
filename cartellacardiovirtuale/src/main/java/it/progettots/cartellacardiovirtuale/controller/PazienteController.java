@@ -100,12 +100,13 @@ public class PazienteController implements ServletContextAware{
 	
 	@GetMapping("/scheda")
 	public String schedaPaziente(@RequestParam("pazienteId") String theUsername, Model theModel) {
-		
 		Utente thePaziente = utenteService.findByUsername(theUsername);
 		logger.info("entro modifica scheda");
 		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
 		logger.info("entrato per la modifica scheda paziente: " + theUsername);
 		theModel.addAttribute("paziente", theTsScheda);
+		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
+		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
 		
 		return "pazienti/scheda-paziente-form-readonly";
 	}
@@ -120,7 +121,8 @@ public class PazienteController implements ServletContextAware{
 		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
 		logger.info("entrato per la modifica scheda paziente: " + theUsername);
 		theModel.addAttribute("paziente", theTsScheda);
-		
+		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
+		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
 		//send over to our form
 		return "pazienti/scheda-paziente-form";
 	}
@@ -143,7 +145,8 @@ public class PazienteController implements ServletContextAware{
 		utenteService.salvaScheda(theTsScheda);
 		logger.info("entrato per la modifica scheda paziente: " + theUsername);
 		theModel.addAttribute("paziente", theTsScheda);
-		
+		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
+		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
 		//send over to our form
 		return "pazienti/scheda-paziente-form-readonly";
 	}
@@ -173,16 +176,16 @@ public class PazienteController implements ServletContextAware{
 		this.servletContext = servletContext;
 	} 
 	    
-	@GetMapping("/schedaPDF")
-	public String schedaPazientePDF(@RequestParam("pazienteId") String theUsername, Model theModel) {
-		logger.info("HELLO SCHEDA PDF");
-		Utente thePaziente = utenteService.findByUsername(theUsername);
-		logger.info("entro modifica scheda");
-		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
-		logger.info("entrato per la modifica scheda paziente: " + theUsername);
-		theModel.addAttribute("paziente", theTsScheda);
-		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
-		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
-		return "pazienti/scheda-paziente-form-pdf";
-	}
+//	@GetMapping("/schedaPDF")
+//	public String schedaPazientePDF(@RequestParam("pazienteId") String theUsername, Model theModel) {
+//		logger.info("HELLO SCHEDA PDF");
+//		Utente thePaziente = utenteService.findByUsername(theUsername);
+//		logger.info("entro modifica scheda");
+//		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
+//		logger.info("entrato per la modifica scheda paziente: " + theUsername);
+//		theModel.addAttribute("paziente", theTsScheda);
+//		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
+//		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
+//		return "pazienti/scheda-paziente-form-pdf";
+//	}
 }

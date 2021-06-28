@@ -16,7 +16,7 @@
 </head>
 <body th:object="${paziente}">
 	<div class="container">
-		<h3>Scheda Medicass</h3>
+		<h3>Scheda Medica</h3>
 		<hr>
 
 		<table class="table table-bordered table-striped">
@@ -135,7 +135,11 @@
 
 
 		<a th:href="@{${'/files/pdf?username='+paziente.username}}"
-			class="btn btn-primary"> EXPORT </a>
+			class="btn btn-primary"> Esporta </a>
+		<a th:href="@{/pazienti/scheda(pazienteId=${paziente.username})}"
+				class="btn btn-primary">
+				Indietro
+		</a>
 	</div>
 </body>
 

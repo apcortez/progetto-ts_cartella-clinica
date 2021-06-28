@@ -59,6 +59,8 @@ public class FileController {
 	@Autowired
 	private PazienteController pazienteController;
 	@Autowired
+	private UtenteController utenteController;
+	@Autowired
 	DBFileStorageService fileService;
 	@Autowired
 	private UtenteService utenteService;
@@ -82,7 +84,7 @@ public class FileController {
 	public String uploadMultipleFiles(@RequestBody() MultipartFile[] files, @RequestParam("username") String username) {
 		System.out.println(username);
 		Arrays.asList(files).stream().map(file -> uploadFile(file, username)).collect(Collectors.toList());
-		return "redirect:/pazienti/schedaPDF?pazienteId=" + username;
+		return "redirect:/pazienti/scheda?pazienteId=" + username;
 	}
 
 	@RequestMapping(value = "/imageDisplay", method = RequestMethod.GET)
@@ -156,13 +158,14 @@ public class FileController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		theModel.addAttribute("pdfExportSuccess", "Cartella esportata con successo.");
 		return pazienteController.listPazienti(theModel);
 
 	}
 	@GetMapping("/deleteFile")
 	public String deleteFile(@RequestParam("fileId") String fileId,@RequestParam("username") String username,Model theModel) {
         dbFileStorageService.removeFile(fileId);
-        return pazienteController.schedaPazientePDF(username, theModel);
+        return pazienteController.schedaPaziente(username, theModel);
        
 	}
 	private static String htmlToXhtml(String html) {
@@ -184,7 +187,51 @@ public class FileController {
 	}
 	
 	
+	@RequestMapping(path = "/pdfUtente")
+	public String getPDFPaziente(@RequestParam("username") String username, HttpServletRequest request, HttpServletResponse response, Model theModel) throws IOException {
+ 
+		/* Do Business Logic */
+		Utente thePaziente = utenteService.findByUsername(username);
+		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
 
+		Context context = new Context();
+		// context.setVariable("paziente", theTsScheda);
+
+		Map<String, Object> variables = new HashMap();
+		variables.put("paziente", theTsScheda);
+		String diabete;
+		String fumatore;
+		if(theTsScheda.getDiabete()==1)
+			diabete="SI";
+		else 
+			diabete="NO";
+		
+		if(theTsScheda.getFumatore()==1)
+			fumatore="SI";
+		else 
+			fumatore="NO";
+		System.out.println(fumatore+diabete);
+		variables.put("fumatore", fumatore);
+		variables.put("diabete", diabete);
+		List<DBFile> dBFiles = fileService.getFilesByPaziente(username);
+		List<DBFile> pdfFiles = fileService.getPDFFilesByPaziente(username);
+		context.setVariables(variables);
+          
+		String html = templateEngine.process("pazienti/pdf_scheda_template", context); 
+		
+		String outputFolder = "C:\\Download" + File.separator +username+".pdf";
+		String xhtml = htmlToXhtml(html);
+        xhtmlToPdf(xhtml, outputFolder);
+        
+		try {
+			pdfService.newPDF(outputFolder.replace("\\","\\\\"),dBFiles,pdfFiles);
+		} catch (IOException | DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		theModel.addAttribute("pdfExportSuccess", "Cartella esportata con successo.");
+		return utenteController.schedaPaziente(theModel);
+	}
 	
    
 }
