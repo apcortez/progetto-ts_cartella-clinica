@@ -1,6 +1,5 @@
 package it.progettots.cartellacardiovirtuale.config;
 
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -19,28 +18,31 @@ import it.progettots.cartellacardiovirtuale.service.UtenteService;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    @Autowired
-    private UtenteService utenteService;
-	
+	@Autowired
+	private UtenteService utenteService; 
+
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
 
 		System.out.println("\n\nIn customAuthenticationSuccessHandler\n\n");
 
 		String username = authentication.getName();
-		
+
 		System.out.println("username=" + username);
 
 		Utente theUtente = utenteService.findByUsername(username);
-		
-		// now place in the session
 		HttpSession session = request.getSession();
 		session.setAttribute("utente", theUtente);
-		
+
+		if (theUtente.getRuolo().getNome_ruolo().equals("PAZIENTE"))
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/utente/scheda"));
+		if (theUtente.getRuolo().getNome_ruolo().equals("MEDICO"))
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/pazienti/list"));
+		if (theUtente.getRuolo().getNome_ruolo().equals("ADMIN"))
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/medici/list"));
+
 		// forward to home page
-		
-		response.sendRedirect(request.getContextPath() + "/");
 	}
 
 }

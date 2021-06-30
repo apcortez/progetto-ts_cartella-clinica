@@ -59,7 +59,7 @@ public class FileController {
 	@Autowired
 	private PazienteController pazienteController;
 	@Autowired
-	private UtenteController utenteController;
+	private UtenteController utenteController ;
 	@Autowired
 	DBFileStorageService fileService;
 	@Autowired
@@ -114,7 +114,7 @@ public class FileController {
 	 * @param response
 	 * @param theModel
 	 * @return
-	 * @throws IOException
+	 * @throws IOException     
 	 */
 	@RequestMapping(path = "/pdf")
 	public String getPDF(@RequestParam("username") String username, HttpServletRequest request, HttpServletResponse response, Model theModel) throws IOException {

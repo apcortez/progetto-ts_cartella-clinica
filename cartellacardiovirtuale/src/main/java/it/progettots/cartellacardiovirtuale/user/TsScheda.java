@@ -232,6 +232,16 @@ public class TsScheda {
 		this.fumatore = fumatore;
 	}
 
+	@Override
+	public String toString() {
+		return "TsScheda [username=" + username + ", nome=" + nome + ", cognome=" + cognome + ", genere=" + genere
+				+ ", email=" + email + ", cellulare=" + cellulare + ", data_nascita=" + data_nascita
+				+ ", luogo_nascita=" + luogo_nascita + ", anamnesi=" + anamnesi + ", motivo_visita=" + motivo_visita
+				+ ", pressione=" + pressione + ", colesterolo=" + colesterolo + ", frequenza_cardiaca="
+				+ frequenza_cardiaca + ", peso=" + peso + ", altezza=" + altezza + ", circonferenza=" + circonferenza
+				+ ", diabete=" + diabete + ", rischio=" + rischio + ", eta=" + eta + ", fumatore=" + fumatore + "]";
+	}
+
 
 	
 	
