@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+  
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.text.BadElementException;
@@ -42,7 +42,9 @@ private DBFileRepository dbFileRepo;
 	public void newPDF(String file_name,List<DBFile>files,List<DBFile> pdfFiles) throws MalformedURLException, IOException, DocumentException {
 		String FILE_NAME = file_name.replace(".pdf", "_final.pdf");
 		 
+		
         test(files,file_name.replace(".pdf", "_imgfinal.pdf"));
+		 
         try {
         	Document document = new Document();
         	PdfCopy copy = new PdfCopy(document, new FileOutputStream(FILE_NAME));
@@ -94,7 +96,10 @@ private DBFileRepository dbFileRepo;
                 document.add(img);
       
         }
-            document.close();
+try {document.close();}catch(Exception e) {
+	System.out.println(e.getMessage());
+}
+            
         }
         
 	

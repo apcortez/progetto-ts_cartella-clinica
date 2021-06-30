@@ -39,13 +39,13 @@ public class PazienteController implements ServletContextAware{
 	DBFileStorageService fileService;
 	private Logger logger = Logger.getLogger(getClass().getName());
 	private ServletContext servletContext;
-	@InitBinder
+	@InitBinder 
 	public void initBinder(WebDataBinder dataBinder) {
 		
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
 		
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
-	}	
+	}	   
 	
 	
 	@GetMapping("/list")
@@ -59,12 +59,14 @@ public class PazienteController implements ServletContextAware{
 			logger.info("username paziente: "+ paziente.getUsername());
 		}
 		theModel.addAttribute("pazienti", thePazienti);
-		return "pazienti/list-pazienti";
-	}
-	
+		theModel.addAttribute("username", username);
+		return "pazienti/list-pazienti"; 
+	} 
+	 
 	@GetMapping("/list2")
 	public String listPazienti2(Model theModel) {
-		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
 		List<Utente> thePazienti = utenteService.findPazienti();
 
 		logger.info("List pazienti  size: "+ thePazienti.size());
@@ -72,6 +74,7 @@ public class PazienteController implements ServletContextAware{
 			logger.info("username paziente: "+ paziente.getUsername());
 		}
 		theModel.addAttribute("pazienti", thePazienti);
+		theModel.addAttribute("username", username);
 		return "pazienti/add-pazienti";
 	}
 	
@@ -97,25 +100,29 @@ public class PazienteController implements ServletContextAware{
 		return "redirect:/pazienti/list";
 
 	}	
-	
 	@GetMapping("/scheda")
 	public String schedaPaziente(@RequestParam("pazienteId") String theUsername, Model theModel) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
 		Utente thePaziente = utenteService.findByUsername(theUsername);
 		logger.info("entro modifica scheda");
 		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
 		logger.info("entrato per la modifica scheda paziente: " + theUsername);
 		theModel.addAttribute("paziente", theTsScheda);
+
+		theModel.addAttribute("username", username);
 		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
 		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
 		
-		return "pazienti/scheda-paziente-form-readonly";
-	}
+		return "pazienti/scheda-paziente-form-readonly"; 
+	}  
 	
 	
 	@GetMapping("/modificaScheda")
 	public String modificaScheda(@RequestParam("pazienteId") String theUsername,
 			Model theModel) {
-		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
 		Utente thePaziente = utenteService.findByUsername(theUsername);
 		logger.info("entro modifica scheda");
 		TsScheda theTsScheda = utenteService.updateScheda(thePaziente);
@@ -123,6 +130,7 @@ public class PazienteController implements ServletContextAware{
 		theModel.addAttribute("paziente", theTsScheda);
 		theModel.addAttribute("documents",fileService.getPDFFilesByPaziente(theUsername));
 		theModel.addAttribute("images",fileService.getFilesByPaziente(theUsername) );
+		theModel.addAttribute("username", username);
 		//send over to our form
 		return "pazienti/scheda-paziente-form";
 	}
@@ -152,8 +160,9 @@ public class PazienteController implements ServletContextAware{
 	}
 	
 	@PostMapping("/updateScheda")
-	public String updateScheda(@Valid @ModelAttribute("tsScheda") TsScheda theTsScheda,
+	public String updateScheda(@Valid @ModelAttribute("paziente") TsScheda theTsScheda,
 			BindingResult theBindingResult, RedirectAttributes redirectAttrs, Model theModel){
+		System.err.println(theTsScheda);
 		String username = theTsScheda.getUsername();
 		logger.info("Processing update for scheda paziente: " + username);
 		
@@ -162,11 +171,14 @@ public class PazienteController implements ServletContextAware{
 		
 		// form validation
 		 if (theBindingResult.hasErrors()){
+			 System.err.println("HELLO HERE ");
+			 theBindingResult.getAllErrors().stream().forEach(e->{
+				 System.err.println(e.getDefaultMessage());});
 			 return "pazienti/scheda-paziente-form";
 	        }
 		utenteService.salvaScheda(theTsScheda);
 		
-		return "redirect:/pazienti/scheda?pazienteId={id}";
+		return "redirect:/pazienti/scheda?pazienteId="+username;
 	}
 
 	
@@ -174,7 +186,7 @@ public class PazienteController implements ServletContextAware{
 	public void setServletContext(ServletContext servletContext) {
 		// TODO Auto-generated method stub
 		this.servletContext = servletContext;
-	} 
+	}   
 	    
 //	@GetMapping("/schedaPDF")
 //	public String schedaPazientePDF(@RequestParam("pazienteId") String theUsername, Model theModel) {

@@ -7,6 +7,8 @@ import javax.validation.Valid;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,29 +47,36 @@ public class MedicoController {
 	
 	@GetMapping("/list")
 	public String listMedici(Model theModel) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
 		List<Utente> theMedici = utenteService.findByRole_Medico();
 		theModel.addAttribute("medici", theMedici);
-		
+
+		theModel.addAttribute("username", username);
 		return "medici/list-medici";
 	}
 	
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
 		theModel.addAttribute("tsUser", new TsUser());
-		
+		theModel.addAttribute("username", username); 
 		return "medici/medico-form";
 	}
 	
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("medicoId") String theUsername,
 													Model theModel) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
 		//get the doctor from the service
 		Utente theMedico = utenteService.findByUsername(theUsername);
 		TsUser theTsMedico = utenteService.updateMedico(theMedico);
 				
 		//set doctor as a model attribute to prepopulate form
 		theModel.addAttribute("medico", theTsMedico);
-		
+		theModel.addAttribute("username", username); 
 		//send over to our form
 		return "medici/medico-form-update";
 	}

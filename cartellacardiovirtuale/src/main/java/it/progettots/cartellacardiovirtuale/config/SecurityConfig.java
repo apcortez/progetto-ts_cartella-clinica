@@ -5,9 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.HttpStatusRequestRejectedHandler;
+import org.springframework.security.web.firewall.RequestRejectedHandler;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 import it.progettots.cartellacardiovirtuale.service.UtenteService;
 
@@ -24,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
+        auth.authenticationProvider(authenticationProvider()); 
     }
 	
 
@@ -54,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		public BCryptPasswordEncoder passwordEncoder() {
 			return new BCryptPasswordEncoder();
 		}
-
+ 
 		//authenticationProvider bean definition
 		@Bean
 		public DaoAuthenticationProvider authenticationProvider() {
@@ -63,7 +68,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			auth.setPasswordEncoder(passwordEncoder()); 
 			return auth;
 		}
-		  
+		@Override
+		public void configure(WebSecurity  web) throws Exception {
+			web.ignoring().antMatchers("/static/**", "/css/**", "/js/**", "/images/**","/assets/**");
+		}
+		@Bean
+		public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
+		    StrictHttpFirewall firewall = new StrictHttpFirewall();
+		    firewall.setAllowUrlEncodedSlash(true);    
+		    return firewall;
+		} 
+		@Bean
+		RequestRejectedHandler requestRejectedHandler() {
+		   return new HttpStatusRequestRejectedHandler ();
+		}
+		
 	}
 
 
