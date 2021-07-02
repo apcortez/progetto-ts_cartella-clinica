@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-  
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.text.BadElementException;
