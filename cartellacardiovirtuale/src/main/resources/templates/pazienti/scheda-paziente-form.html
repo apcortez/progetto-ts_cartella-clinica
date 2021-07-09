@@ -207,7 +207,9 @@
 										<center class="mt-4">
 											<img src="../static/assets/images/users/5.jpg"
 												class="rounded-circle" width="150" />
-											<h4 class="card-title mt-2">
+											<h4 class="card-title mt-2"><input type="hidden" for="inputNome"
+													th:value="*{username}" class="ps-0 form-control-line"
+													th:field="*{username}">
 												<span type="text" class="ps-0 form-control-line"
 													th:text="${paziente.username}" />
 											</h4>
