@@ -216,7 +216,7 @@ public class FileController {
 		List<DBFile> dBFiles = fileService.getFilesByPaziente(username);
 		List<DBFile> pdfFiles = fileService.getPDFFilesByPaziente(username);
 		context.setVariables(variables);
-          
+           
 		String html = templateEngine.process("pazienti/pdf_scheda_template", context); 
 		
 		String outputFolder = "C:\\Download" + File.separator +username+".pdf";

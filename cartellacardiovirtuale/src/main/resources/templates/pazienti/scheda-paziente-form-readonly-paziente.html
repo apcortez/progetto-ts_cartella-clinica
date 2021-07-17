@@ -11,7 +11,7 @@
 <meta name="description"
 	content="Monster Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
 <meta name="robots" content="noindex,nofollow">
-<title>Monster Lite Template by WrapPixel</title>
+<title>My Cartella Cardiologica Virtuale</title>
 <link rel="canonical"
 	href="https://www.wrappixel.com/templates/monster-admin-lite/" />
 <!-- Favicon icon -->
@@ -52,7 +52,7 @@
 					<!-- ============================================================== -->
 					<!-- Logo -->
 					<!-- ============================================================== -->
-					<a class="navbar-brand" href="index.html"> <!-- Logo icon --> <b
+					<a th:href="@{/utente/scheda}" class="navbar-brand" href="index.html"> <!-- Logo icon --> <b
 						class="logo-icon"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 							<!-- Dark Logo icon --> <img
 							src="/static/assets/images/logo-icon.png" alt="homepage"
@@ -89,13 +89,7 @@
 						<!-- Search -->
 						<!-- ============================================================== -->
 
-						<li class="nav-item hidden-sm-down">
-							<form class="app-search ps-3">
-								<input type="text" class="form-control"
-									placeholder="Search for..."> <a class="srh-btn"><i
-									class="ti-search"></i></a>
-							</form>
-						</li>
+						
 					</ul>
 
 					<!-- ============================================================== -->
@@ -295,7 +289,7 @@
 								<form class="form-horizontal form-material mx-2">
 									<div class="form-row">
 										<div class="form-group">
-											<label class="col-md-12 mb-0" for="inputAnamnesi">Anamnesi</label>
+											<label class="col-md-12 mb-0" for="inputAnamnesi">Anamnesi: </label>
 											<div class="col-md-12">
 												<input type="text" readonly
 													class="form-control ps-0 form-control-line"
@@ -314,7 +308,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-12 mb-0" for="inputPressione">Pressione:
+										<label class="col-md-12 mb-0" for="inputPressione">Pressione sistolica: mmHg
 										</label>
 										<div class="col-md-12">
 											<input type="text" readonly
@@ -323,7 +317,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-12 mb-0" for="inputColesterolo">Colesterolo:
+										<label class="col-md-12 mb-0" for="inputColesterolo">Colesterolo: mg/dl
 										</label>
 										<div class="col-md-12">
 											<input type="text" readonly
@@ -334,7 +328,7 @@
 									<div class="form-row">
 										<div class="form-group">
 											<label class="col-md-12 mb-0" for="inputFrequenza">Frequenza
-												cardiaca: </label>
+												cardiaca: bpm </label>
 											<div class="col-md-12">
 												<input type="text" readonly
 													class="form-control ps-0 form-control-line"
@@ -343,7 +337,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-12 mb-0" for="inputPeso">Peso: </label>
+											<label class="col-md-12 mb-0" for="inputPeso">Peso: kg </label>
 											<div class="col-md-12">
 												<input type="text" readonly
 													class="form-control ps-0 form-control-line" id="inputPeso"
@@ -351,7 +345,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-12 mb-0" for="inputAltezza">Altezza:
+											<label class="col-md-12 mb-0" for="inputAltezza">Altezza: cm
 											</label>
 											<div class="col-md-12">
 												<input type="text" readonly
@@ -361,7 +355,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-12 mb-0" for="inputCirconferenza">Circonferenza:
+										<label class="col-md-12 mb-0" for="inputCirconferenza">Circonferenza: cm
 										</label>
 										<div class="col-md-12">
 											<input type="text" readonly

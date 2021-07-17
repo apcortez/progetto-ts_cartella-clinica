@@ -11,7 +11,7 @@
 <meta name="description"
 	content="Monster Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
 <meta name="robots" content="noindex,nofollow">
-<title>Monster Lite Template by WrapPixel</title>
+<title>My Cartella Cardiologica Virtuale</title>
 <link rel="canonical"
 	href="https://www.wrappixel.com/templates/monster-admin-lite/" />
 <!-- Favicon icon -->
@@ -52,7 +52,7 @@
 					<!-- ============================================================== -->
 					<!-- Logo -->
 					<!-- ============================================================== -->
-					<a class="navbar-brand" href="index.html"> <!-- Logo icon --> <b
+					<a th:href="@{/pazienti/list}" class="navbar-brand" href="index.html"> <!-- Logo icon --> <b
 						class="logo-icon"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 							<!-- Dark Logo icon --> <img
 							src="../static/assets/images/logo-icon.png" alt="homepage"
@@ -110,8 +110,8 @@
 							id="navbarDropdown" role="button" data-bs-toggle="dropdown"
 							aria-expanded="false"> <img
 								src="../static/assets/images/users/5.jpg" alt="user"
-								class="profile-pic me-2"><span type="text" class="ps-0 form-control-line"
-												th:text="${username}" />
+								class="profile-pic me-2"><span type="text"
+								class="ps-0 form-control-line" th:text="${username}" />
 						</a>
 							<ul class="dropdown-menu show" aria-labelledby="navbarDropdown"></ul>
 						</li>
@@ -207,108 +207,112 @@
 										<center class="mt-4">
 											<img src="../static/assets/images/users/5.jpg"
 												class="rounded-circle" width="150" />
-											<h4 class="card-title mt-2"><span type="text" class="ps-0 form-control-line"
-												th:text="${paziente.username}" /></h4>
-											
+											<h4 class="card-title mt-2"><input type="hidden" for="inputNome"
+													th:value="*{username}" class="ps-0 form-control-line"
+													th:field="*{username}">
+												<span type="text" class="ps-0 form-control-line"
+													th:text="${paziente.username}" />
+											</h4>
+
 										</center>
-											<div class="row justify-content-center">
-												<div class="col-md-4">
-													<b>Nome</b>
-												</div>
-												<div class="col-md-4">
-													<span type="text" class="ps-0 form-control-line"
-														th:text="*{nome}" /> <input type="hidden" for="inputNome"
-														th:value="*{nome}" class="ps-0 form-control-line"
-														th:field="*{nome}">
-
-												</div>
+										<div class="row justify-content-center">
+											<div class="col-md-4">
+												<b>Nome</b>
+											</div>
+											<div class="col-md-4">
+												<span type="text" class="ps-0 form-control-line"
+													th:text="*{nome}" /> <input type="hidden" for="inputNome"
+													th:value="*{nome}" class="ps-0 form-control-line"
+													th:field="*{nome}">
 
 											</div>
-											<div class="row justify-content-center">
-												<div class="col-md-4">
-													<b>Cognome</b>
-												</div>
-												<div class="col-md-4">
-													<span type="text" class="ps-0 form-control-line"
-														th:text="*{cognome}" /> <input type="hidden"
-														for="inputCognome" th:value="*{cognome}"
-														class="ps-0 form-control-line" th:field="*{cognome}">
-												</div>
 
+										</div>
+										<div class="row justify-content-center">
+											<div class="col-md-4">
+												<b>Cognome</b>
 											</div>
-											<div class="row justify-content-center">
-												<div class="col-md-4">
-													<b>Genere</b>
-												</div>
-												<div class="col-md-4">
-													<span type="text" class="ps-0 form-control-line"
-														th:text="*{genere}" /> <input type="hidden"
-														for="inputGenere" th:value="*{genere}"
-														class="ps-0 form-control-line" th:field="*{genere}">
-												</div>
+											<div class="col-md-4">
+												<span type="text" class="ps-0 form-control-line"
+													th:text="*{cognome}" /> <input type="hidden"
+													for="inputCognome" th:value="*{cognome}"
+													class="ps-0 form-control-line" th:field="*{cognome}">
+											</div>
 
+										</div>
+										<div class="row justify-content-center">
+											<div class="col-md-4">
+												<b>Genere</b>
 											</div>
-											<div class="row justify-content-center">
-												<div class="col-md-4">
-													<b>Email</b>
-												</div>
-												<div class="col-md-4">
-													<span type="text" class="ps-0 form-control-line"
-														th:text="*{email}" /> <input type="hidden"
-														for="inputEmail" th:value="*{email}"
-														class="ps-0 form-control-line" th:field="*{email}">
-												</div>
+											<div class="col-md-4">
+												<span type="text" class="ps-0 form-control-line"
+													th:text="*{genere}" /> <input type="hidden"
+													for="inputGenere" th:value="*{genere}"
+													class="ps-0 form-control-line" th:field="*{genere}">
+											</div>
 
+										</div>
+										<div class="row justify-content-center">
+											<div class="col-md-4">
+												<b>Email</b>
 											</div>
-											<div class="row justify-content-center">
-												<div class="col-md-4">
-													<b>Cellulare</b>
-												</div>
-												<div class="col-md-4">
-													<span type="text" class="ps-0 form-control-line"
-														th:text="*{cellulare}" /> <input type="hidden"
-														for="inputCellulare" th:value="*{cellulare}"
-														class="ps-0 form-control-line" th:field="*{cellulare}">
-												</div>
+											<div class="col-md-4">
+												<span type="text" class="ps-0 form-control-line"
+													th:text="*{email}" /> <input type="hidden"
+													for="inputEmail" th:value="*{email}"
+													class="ps-0 form-control-line" th:field="*{email}">
+											</div>
 
+										</div>
+										<div class="row justify-content-center">
+											<div class="col-md-4">
+												<b>Cellulare</b>
 											</div>
-											<div class="row justify-content-center">
-												<div class="col-md-4">
-													<b>Data di nascita</b>
-												</div>
-												<div class="col-md-4">
-													<span type="text" class="ps-0 form-control-line"
-														th:text="*{data_nascita}" /> <input type="hidden"
-														for="inputDataNascita" th:value="*{data_nascita}"
-														class="ps-0 form-control-line" th:field="*{data_nascita}">
-												</div>
+											<div class="col-md-4">
+												<span type="text" class="ps-0 form-control-line"
+													th:text="*{cellulare}" /> <input type="hidden"
+													for="inputCellulare" th:value="*{cellulare}"
+													class="ps-0 form-control-line" th:field="*{cellulare}">
+											</div>
 
+										</div>
+										<div class="row justify-content-center">
+											<div class="col-md-4">
+												<b>Data di nascita</b>
 											</div>
-											<div class="row justify-content-center">
-												<div class="col-md-4">
-													<b>Luogo di nascita</b>
-												</div>
-												<div class="col-md-4">
-													<span type="text" class="ps-0 form-control-line"
-														th:text="*{luogo_nascita}" /> <input type="hidden"
-														for="inputLuogoNascita" th:value="*{luogo_nascita}"
-														class="ps-0 form-control-line" th:field="*{luogo_nascita}">
-												</div>
+											<div class="col-md-4">
+												<span type="text" class="ps-0 form-control-line"
+													th:text="*{data_nascita}" /> <input type="hidden"
+													for="inputDataNascita" th:value="*{data_nascita}"
+													class="ps-0 form-control-line" th:field="*{data_nascita}">
+											</div>
 
+										</div>
+										<div class="row justify-content-center">
+											<div class="col-md-4">
+												<b>Luogo di nascita</b>
 											</div>
-											<div class="row justify-content-center">
-												<div class="col-md-4">
-													<b>Rischio Cardiologico</b>
-												</div>
-												<div class="col-md-4">
-													<span type="text" class="ps-0 form-control-line"
-														th:text="*{rischio}" /> <input type="hidden"
-														for="inputRischio" th:value="*{rischio}"
-														class="ps-0 form-control-line" th:field="*{rischio}">
-												</div>
+											<div class="col-md-4">
+												<span type="text" class="ps-0 form-control-line"
+													th:text="*{luogo_nascita}" /> <input type="hidden"
+													for="inputLuogoNascita" th:value="*{luogo_nascita}"
+													class="ps-0 form-control-line" th:field="*{luogo_nascita}">
+											</div>
 
+										</div>
+										<div class="row justify-content-center">
+											<div class="col-md-4">
+												<b>Rischio Cardiologico</b>
 											</div>
-										
+											<div class="col-md-4">
+												<span type="text" class="ps-0 form-control-line"
+													th:text="*{rischio}" /> <input type="hidden"
+													for="inputRischio" th:value="*{rischio}"
+													class="ps-0 form-control-line" th:field="*{rischio}">
+											</div>
+
+										</div>
+
 
 
 									</div>
@@ -322,7 +326,7 @@
 
 										<div class="form-row">
 											<div class="form-group">
-												<label class="col-md-12 mb-0" for="inputAnamnesi">Anamnesi</label>
+												<label class="col-md-12 mb-0" for="inputAnamnesi">Anamnesi: </label>
 												<div class="col-md-12">
 													<input type="text"
 														class="form-control ps-0 form-control-line"
@@ -341,7 +345,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-12 mb-0" for="inputPressione">Pressione:
+											<label class="col-md-12 mb-0" for="inputPressione">Pressione Sistolica: mmHg
 											</label>
 											<div class="col-md-12">
 												<input type="text"
@@ -350,7 +354,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-12 mb-0" for="inputColesterolo">Colesterolo:
+											<label class="col-md-12 mb-0" for="inputColesterolo">Colesterolo: mg/dl
 											</label>
 											<div class="col-md-12">
 												<input type="text"
@@ -361,7 +365,7 @@
 										<div class="form-row">
 											<div class="form-group">
 												<label class="col-md-12 mb-0" for="inputFrequenza">Frequenza
-													cardiaca: </label>
+													cardiaca: bpm</label>
 												<div class="col-md-12">
 													<input type="text"
 														class="form-control ps-0 form-control-line"
@@ -369,7 +373,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-md-12 mb-0" for="inputPeso">Peso:
+												<label class="col-md-12 mb-0" for="inputPeso">Peso: Kg
 												</label>
 												<div class="col-md-12">
 													<input type="text"
@@ -378,7 +382,7 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-md-12 mb-0" for="inputAltezza">Altezza:
+												<label class="col-md-12 mb-0" for="inputAltezza">Altezza: cm
 												</label>
 												<div class="col-md-12">
 													<input type="text"
@@ -388,7 +392,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-12 mb-0" for="inputCirconferenza">Circonferenza:
+											<label class="col-md-12 mb-0" for="inputCirconferenza">Circonferenza: cm
 											</label>
 											<div class="col-md-12">
 												<input type="text"
@@ -426,7 +430,23 @@
 											class="btn btn-danger"> X </a>
 
 									</div>
-
+									<div th:if="${#fields.hasErrors()}"
+										style="margin-bottom: 25px" class="text-danger">
+										<ul>
+											<li th:each="err : ${#fields.errors('colesterolo')}"
+												th:text=" ${err}" />
+												<li th:each="err : ${#fields.errors('pressione')}"
+												th:text=" ${err}" />
+												<li th:each="err : ${#fields.errors('frequenza_cardiaca')}"
+												th:text=" ${err}" />
+												<li th:each="err : ${#fields.errors('peso')}"
+												th:text=" ${err}" />
+												<li th:each="err : ${#fields.errors('altezza')}"
+												th:text=" ${err}" />
+												<li th:each="err : ${#fields.errors('circonferenza')}"
+												th:text=" ${err}" />
+										</ul>
+									</div>
 								</div>
 
 							</div>

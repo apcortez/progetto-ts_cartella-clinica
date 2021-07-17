@@ -21,8 +21,8 @@
 		<div class="login-wrap">
 	<div class="login-html">
 
-		<input id="tab-1" type="radio" name="tab" class="sign-in" ><label for="tab-1" class="tab">Sign In</label>
-		<input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign Up</label>
+		<input id="tab-1" type="radio" name="tab" class="sign-in" ><label for="tab-1" class="tab">Log in</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Registrazione</label>
 		<div class="login-form">
 			<div class="sign-in-htm">
 			<form th:action="@{/authenticateTheUser}"
@@ -43,27 +43,7 @@
 				<div class="foot-lnk">
 				</div>
 				</form>
-				 <div class="form-group">
-					        <div class="col-xs-15">
-					            <div>
 
-									<!-- Check for login error -->
-									<div th:if="${param.error}" class="alert alert-danger col-xs-offset-1 col-xs-10">
-										Username and password non validi.
-									</div>
-
-									<!-- Check for logout -->
-									<div th:if="${param.logout}"class="alert alert-success col-xs-offset-1 col-xs-10">
-										Log out con successo.
-									</div>
-
-									<!-- Check for logout -->
-									<div th:if="${registrationSuccess}"class="alert alert-success col-xs-offset-1 col-xs-10">
-										Registrazione avvenuta con successo.
-									</div>
-					            </div>
-					        </div>
-					    </div>
 			</div>
 			<div class="sign-up-htm">
 
@@ -216,28 +196,7 @@
 
 
       </div>
-				<div class="form-group">
-					        <div class="col-xs-15">
-					            <div>
-
-									<!-- Check for login error -->
-									<div th:if="${param.error}" class="alert alert-danger col-xs-offset-1 col-xs-10">
-										Username and password non validi.
-									</div>
-
-									<!-- Check for logout -->
-									<div th:if="${param.logout}"class="alert alert-success col-xs-offset-1 col-xs-10">
-										Log out con successo.
-									</div>
-
-									<!-- Check for logout -->
-									<div th:if="${registrationSuccess}"class="alert alert-success col-xs-offset-1 col-xs-10">
-										Registrazione avvenuta con successo.
-									</div>
-					            </div>
-					        </div>
-					    </div>
-
+				
 		</div>
 
 	</div>

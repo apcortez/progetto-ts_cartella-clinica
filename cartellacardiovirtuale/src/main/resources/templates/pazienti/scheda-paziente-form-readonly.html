@@ -11,7 +11,7 @@
 <meta name="description"
 	content="Monster Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
 <meta name="robots" content="noindex,nofollow">
-<title>Monster Lite Template by WrapPixel</title>
+<title>My Cartella Cardiologica Virtuale</title>
 <link rel="canonical"
 	href="https://www.wrappixel.com/templates/monster-admin-lite/" />
 <!-- Favicon icon -->
@@ -52,7 +52,7 @@
 					<!-- ============================================================== -->
 					<!-- Logo -->
 					<!-- ============================================================== -->
-					<a class="navbar-brand" href="index.html"> <!-- Logo icon --> <b
+					<a th:href="@{/pazienti/list}" class="navbar-brand" href="index.html"> <!-- Logo icon --> <b
 						class="logo-icon"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 							<!-- Dark Logo icon --> <img
 							src="/static/assets/images/logo-icon.png" alt="homepage"
@@ -173,7 +173,7 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a th:href="@{/pazienti/list}">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Profile</li>
+									<li class="breadcrumb-item active" aria-current="page">Cartella Paziente</li>
 								</ol>
 							</nav>
 						</div>
@@ -293,10 +293,10 @@
 					<div class="col-lg-8 col-xlg-9 col-md-7">
 						<div class="card">
 							<div class="card-body">
-								<form class="form-horizontal form-material mx-2">
+								
 									<div class="form-row">
 										<div class="form-group">
-											<label class="col-md-12 mb-0" for="inputAnamnesi">Anamnesi</label>
+											<label class="col-md-12 mb-0" for="inputAnamnesi">Anamnesi: </label>
 											<div class="col-md-12">
 												<input type="text" readonly
 													class="form-control ps-0 form-control-line"
@@ -315,7 +315,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-12 mb-0" for="inputPressione">Pressione:
+										<label class="col-md-12 mb-0" for="inputPressione">Pressione Sistolica: mmHg
 										</label>
 										<div class="col-md-12">
 											<input type="text" readonly
@@ -324,7 +324,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-12 mb-0" for="inputColesterolo">Colesterolo:
+										<label class="col-md-12 mb-0" for="inputColesterolo">Colesterolo: mg/dl
 										</label>
 										<div class="col-md-12">
 											<input type="text" readonly
@@ -335,7 +335,7 @@
 									<div class="form-row">
 										<div class="form-group">
 											<label class="col-md-12 mb-0" for="inputFrequenza">Frequenza
-												cardiaca: </label>
+												cardiaca: bpm</label>
 											<div class="col-md-12">
 												<input type="text" readonly
 													class="form-control ps-0 form-control-line"
@@ -344,7 +344,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-12 mb-0" for="inputPeso">Peso: </label>
+											<label class="col-md-12 mb-0" for="inputPeso">Peso: kg</label>
 											<div class="col-md-12">
 												<input type="text" readonly
 													class="form-control ps-0 form-control-line" id="inputPeso"
@@ -352,7 +352,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-12 mb-0" for="inputAltezza">Altezza:
+											<label class="col-md-12 mb-0" for="inputAltezza">Altezza: cm
 											</label>
 											<div class="col-md-12">
 												<input type="text" readonly
@@ -362,7 +362,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-12 mb-0" for="inputCirconferenza">Circonferenza:
+										<label class="col-md-12 mb-0" for="inputCirconferenza">Circonferenza: cm
 										</label>
 										<div class="col-md-12">
 											<input type="text" readonly
@@ -390,13 +390,14 @@
 												th:field="${paziente.fumatore}" value="0" />NO
 										</div>
 									</div>
-							</div>
-							<form
+									<form
 								th:action="@{/files/uploadMultipleFiles(username=${paziente.username})}"
 								th:object="${files}" method="POST" enctype="multipart/form-data">
 								<input type="file" name="files" multiple><br> <input
 									type="submit" value="Carica" class="btn btn-primary">
 							</form>
+							</div>
+							
 
 							<div th:each="file : ${documents}">
 								<span type="text" class="form-control-plaintext"
