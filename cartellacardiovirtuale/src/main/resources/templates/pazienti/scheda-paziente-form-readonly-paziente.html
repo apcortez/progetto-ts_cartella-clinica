@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords"
+	content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Monsterlite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Monster admin lite design, Monster admin lite dashboard bootstrap 5 dashboard template">
+<meta name="description"
+	content="Monster Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+<meta name="robots" content="noindex,nofollow">
+<title>My Cartella Cardiologica Virtuale</title>
+<link rel="canonical"
+	href="https://www.wrappixel.com/templates/monster-admin-lite/" />
+<!-- Favicon icon -->
+<link rel="icon" type="image/png" sizes="16x16"
+	href="../static/assets/images/favicon.png">
+<!-- Custom CSS -->
+<link th:href="@{/static/css/style.min.css}" rel="stylesheet">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+	<!-- ============================================================== -->
+	<!-- Preloader - style you can find in spinners.css -->
+	<!-- ============================================================== -->
+	<div class="preloader">
+		<div class="lds-ripple">
+			<div class="lds-pos"></div>
+			<div class="lds-pos"></div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- Main wrapper - style you can find in pages.scss -->
+	<!-- ============================================================== -->
+	<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5"
+		data-sidebartype="full" data-sidebar-position="absolute"
+		data-header-position="absolute" data-boxed-layout="full">
+		<!-- ============================================================== -->
+		<!-- Topbar header - style you can find in pages.scss -->
+		<!-- ============================================================== -->
+		<header class="topbar" data-navbarbg="skin6">
+			<nav class="navbar top-navbar navbar-expand-md navbar-dark">
+				<div class="navbar-header" data-logobg="skin6">
+					<!-- ============================================================== -->
+					<!-- Logo -->
+					<!-- ============================================================== -->
+					<a th:href="@{/utente/scheda}" class="navbar-brand" href="index.html"> <!-- Logo icon --> <b
+						class="logo-icon"> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+							<!-- Dark Logo icon --> <img
+							src="/static/assets/images/logo-icon.png" alt="homepage"
+							class="dark-logo" />
+
+					</b> <!--End Logo icon --> <!-- Logo text --> <span class="logo-text">
+							<!-- dark Logo text --> <img
+							src="../static/assets/images/logo-text.png" alt="homepage"
+							class="dark-logo" />
+
+					</span>
+					</a>
+					<!-- ============================================================== -->
+					<!-- End Logo -->
+					<!-- ============================================================== -->
+					<!-- ============================================================== -->
+					<!-- toggle and nav items -->
+					<!-- ============================================================== -->
+					<a
+						class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+						href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+				</div>
+				<!-- ============================================================== -->
+				<!-- End Logo -->
+				<!-- ============================================================== -->
+				<div class="navbar-collapse collapse" id="navbarSupportedContent"
+					data-navbarbg="skin5">
+
+					<!-- ============================================================== -->
+					<!-- toggle and nav items -->
+					<!-- ============================================================== -->
+					<ul class="navbar-nav me-auto mt-md-0 ">
+						<!-- ============================================================== -->
+						<!-- Search -->
+						<!-- ============================================================== -->
+
+						
+					</ul>
+
+					<!-- ============================================================== -->
+					<!-- Right side toggle and nav items -->
+					<!-- ============================================================== -->
+					<ul class="navbar-nav">
+						<!-- ============================================================== -->
+						<!-- User profile and search -->
+						<!-- ============================================================== -->
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle waves-effect waves-dark" href="#"
+							id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false"> <img
+								src="../static/assets/images/users/1.jpg" alt="user"
+								class="profile-pic me-2"><span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.nome}" /> <span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.cognome}" />
+						</a>
+							<ul class="dropdown-menu show" aria-labelledby="navbarDropdown"></ul>
+						</li>
+						<li class="nav-item dropdown"><form action="#"
+								th:action="@{/logout}" method="POST">
+
+								<input type="submit" value="Logout" class="btn btn-danger mt-2" />
+
+							</form></li>
+					</ul>
+
+				</div>
+			</nav>
+		</header>
+		<!-- ============================================================== -->
+		<!-- End Topbar header -->
+		<!-- ============================================================== -->
+		<!-- ============================================================== -->
+		<!-- Left Sidebar - style you can find in sidebar.scss  -->
+		<!-- ============================================================== -->
+		<aside class="left-sidebar" data-sidebarbg="skin6">
+			<!-- Sidebar scroll-->
+			<div class="scroll-sidebar">
+				<!-- Sidebar navigation-->
+				<nav class="sidebar-nav">
+					<ul id="sidebarnav">
+						<!-- User Profile-->
+						<li class="sidebar-item"><a th:href="@{/utente/scheda}"
+							class="sidebar-link waves-effect waves-dark sidebar-link"
+							href="index.html" aria-expanded="false"><i
+								class="me-3 far fa-clock fa-fw" aria-hidden="true"></i><span
+								class="hide-menu">Dashboard</span></a></li>
+					</ul>
+
+				</nav>
+				<!-- End Sidebar navigation -->
+			</div>
+			<!-- End Sidebar scroll-->
+		</aside>
+		<!-- ============================================================== -->
+		<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+		<!-- ============================================================== -->
+		<!-- ============================================================== -->
+		<!-- Page wrapper  -->
+		<!-- ============================================================== -->
+		<div class="page-wrapper">
+			<!-- ============================================================== -->
+			<!-- Bread crumb and right sidebar toggle -->
+			<!-- ============================================================== -->
+			<div class="page-breadcrumb">
+				<div class="row align-items-center">
+					<div class="col-md-6 col-8 align-self-center">
+						<h3 class="page-title mb-0 p-0">Cartella Clinica</h3>
+						<div class="d-flex align-items-center">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a th:href="@{/utente/scheda}"
+										aria-expanded="false">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Profile</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+					<div class="col-md-6 col-4 align-self-center"></div>
+				</div>
+			</div>
+			<!-- ============================================================== -->
+			<!-- End Bread crumb and right sidebar toggle -->
+			<!-- ============================================================== -->
+			<!-- ============================================================== -->
+			<!-- Container fluid  -->
+			<!-- ============================================================== -->
+			<div class="container-fluid">
+				<!-- ============================================================== -->
+				<!-- Start Page Content -->
+				<!-- ============================================================== -->
+				<!-- Row -->
+				<div class="row">
+					<!-- Column -->
+					<div class="col-lg-4 col-xlg-3 col-md-5">
+						<div class="card">
+							<div class="card-body profile-card">
+								<center>
+									<img src="../static/assets/images/users/5.jpg"
+										class="rounded-circle" width="150" />
+									<h4 class="card-title mt-2">
+										<span type="text" class="ps-0 form-control-line"
+											th:text="${paziente.username}" />
+									</h4> 
+									
+									</center>
+									<div class="row justify-content-center">
+										<div class="col-md-4">
+											<b>Nome</b>
+										</div>
+										<div class="col-md-4">
+											<span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.nome}" />
+										</div>
+
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-md-4">
+											<b>Cognome</b>
+										</div>
+										<div class="col-md-4">
+											<span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.cognome}" />
+										</div>
+
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-md-4">
+											<b>Genere</b>
+										</div>
+										<div class="col-md-4">
+											<span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.genere}" />
+										</div>
+
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-md-4">
+											<b>Email</b>
+										</div>
+										<div class="col-md-4">
+											<span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.email}" />
+										</div>
+
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-md-4">
+											<b>Cellulare</b>
+										</div>
+										<div class="col-md-4">
+											<span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.cellulare}" />
+										</div>
+
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-md-4">
+											<b>Data di nascita</b>
+										</div>
+										<div class="col-md-4">
+											<span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.data_nascita}" />
+										</div>
+
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-md-4">
+											<b>Luogo di nascita</b>
+										</div>
+										<div class="col-md-4">
+											<span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.luogo_nascita}" />
+										</div>
+
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-md-4">
+											<b>Rischio Cardiologico</b>
+										</div>
+										<div class="col-md-4">
+											<span type="text" class="ps-0 form-control-line"
+												th:text="${paziente.rischio}" />
+										</div>
+
+									</div>
+							</div>
+						</div>
+					</div>
+					<!-- Column -->
+					<!-- Column -->
+					<div class="col-lg-8 col-xlg-9 col-md-7">
+						<div class="card">
+							<div class="card-body">
+								<form class="form-horizontal form-material mx-2">
+									<div class="form-row">
+										<div class="form-group">
+											<label class="col-md-12 mb-0" for="inputAnamnesi">Anamnesi: </label>
+											<div class="col-md-12">
+												<input type="text" readonly
+													class="form-control ps-0 form-control-line"
+													id="inputAnamnesi" th:field="${paziente.anamnesi}">
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-12 mb-0" for="inputMotivo">Motivo
+											Visita: </label>
+										<div class="col-md-12">
+											<input type="text" readonly
+												class="form-control ps-0 form-control-line" id="inputMotivo"
+												th:field="${paziente.motivo_visita}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-12 mb-0" for="inputPressione">Pressione sistolica: mmHg
+										</label>
+										<div class="col-md-12">
+											<input type="text" readonly
+												class="form-control ps-0 form-control-line"
+												id="inputPressione" th:field="${paziente.pressione}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-12 mb-0" for="inputColesterolo">Colesterolo: mg/dl
+										</label>
+										<div class="col-md-12">
+											<input type="text" readonly
+												class="form-control ps-0 form-control-line"
+												id="inputColesterolo" th:field="${paziente.colesterolo}">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group">
+											<label class="col-md-12 mb-0" for="inputFrequenza">Frequenza
+												cardiaca: bpm </label>
+											<div class="col-md-12">
+												<input type="text" readonly
+													class="form-control ps-0 form-control-line"
+													id="inputFrequenza"
+													th:field="${paziente.frequenza_cardiaca}">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-12 mb-0" for="inputPeso">Peso: kg </label>
+											<div class="col-md-12">
+												<input type="text" readonly
+													class="form-control ps-0 form-control-line" id="inputPeso"
+													th:field="${paziente.peso}">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-12 mb-0" for="inputAltezza">Altezza: cm
+											</label>
+											<div class="col-md-12">
+												<input type="text" readonly
+													class="form-control ps-0 form-control-line"
+													id="inputAltezza" th:field="${paziente.altezza}">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-12 mb-0" for="inputCirconferenza">Circonferenza: cm
+										</label>
+										<div class="col-md-12">
+											<input type="text" readonly
+												class="form-control ps-0 form-control-line"
+												id="inputCirconferenza" th:field="${paziente.circonferenza}">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-12 mb-0" for="inputDiabete">Diabetico:
+										</label>
+										<div class="col-md-12">
+											<input type="radio" readonly id="inputDiabete"
+												th:field="${paziente.diabete}" value="1" />SI <input
+												type="radio" readonly id="inputDiabete"
+												th:field="${paziente.diabete}" value="0" />NO
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-12 mb-0" for="inputFumatore">Fumatore:
+										</label>
+										<div class="col-md-12">
+											<input type="radio" readonly id="inputFumatore"
+												th:field="${paziente.fumatore}" value="1" />SI <input
+												type="radio" readonly id="inputFumatore"
+												th:field="${paziente.fumatore}" value="0" />NO
+										</div>
+									</div>
+							</div>
+
+
+							<div th:each="file : ${documents}">
+								<span type="text" class="form-control-plaintext"
+									th:utext="${file.fileName}"></span>
+							</div>
+							<div>
+								<a
+									th:href="@{${'/files/pdfUtente?username='+paziente.username}}"
+									class="btn btn-primary"> Esporta </a>
+							</div>
+
+
+
+						</div>
+
+					</div>
+
+
+					<!-- Recent blogss -->
+					<!-- ============================================================== -->
+					<div class="row justify-content-center">
+						<!-- Column -->
+						<div th:each="file : ${images}" class="col-lg-4 col-md-6">
+							<div class="card">
+								<img class="card-img-top img-responsive"
+									th:src="@{${'/files/imageDisplay?id='+file.id}}" width="300"
+									alt="Card" />
+
+							</div>
+						</div>
+						<!-- Column -->
+
+					</div>
+					<!-- ============================================================== -->
+					<!-- Recent blogss -->
+				</div>
+			</div>
+		</div>
+		<!-- Column -->
+
+	</div>
+
+	<!-- Row -->
+	<!-- ============================================================== -->
+	<!-- End PAge Content -->
+	<!-- ============================================================== -->
+	<!-- ============================================================== -->
+	<!-- Right sidebar -->
+	<!-- ============================================================== -->
+	<!-- .right-sidebar -->
+	<!-- ============================================================== -->
+	<!-- End Right sidebar -->
+	<!-- ============================================================== -->
+	</div>
+	<!-- ============================================================== -->
+	<!-- End Container fluid  -->
+	<!-- ============================================================== -->
+	<!-- ============================================================== -->
+	<!-- footer -->
+	<!-- ============================================================== -->
+
+	<!-- ============================================================== -->
+	<!-- End footer -->
+	<!-- ============================================================== -->
+	</div>
+	<!-- ============================================================== -->
+	<!-- End Page wrapper  -->
+	<!-- ============================================================== -->
+	</div>
+	<!-- ============================================================== -->
+	<!-- End Wrapper -->
+	<!-- ============================================================== -->
+	<!-- ============================================================== -->
+	<!-- All Jquery -->
+	<!-- ============================================================== -->
+	<script src="/static/assets/plugins/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap tether Core JavaScript -->
+	<script
+		src="/static/assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/static/js/app-style-switcher.js"></script>
+	<!--Wave Effects -->
+	<script src="/static/js/waves.js"></script>
+	<!--Menu sidebar -->
+	<script src="/static/js/sidebarmenu.js"></script>
+	<!--Custom JavaScript -->
+	<script src="/static/js/custom.js"></script>
+</body>
+
+</html>

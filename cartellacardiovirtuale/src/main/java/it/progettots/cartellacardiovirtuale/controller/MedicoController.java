@@ -4,107 +4,131 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.progettots.cartellacardiovirtuale.entity.Medico;
-import it.progettots.cartellacardiovirtuale.service.MedicoService;
+import it.progettots.cartellacardiovirtuale.entity.Utente;
+import it.progettots.cartellacardiovirtuale.service.UtenteService;
+import it.progettots.cartellacardiovirtuale.user.TsUser;
 
 @Controller
 @RequestMapping("/medici")
 public class MedicoController {
 	
-	private MedicoService medicoService;
+
+	@Autowired
+	private UtenteService utenteService;
 	
-	public MedicoController(MedicoService theMedicoService) {
-		medicoService = theMedicoService;
-	}
+	private Logger logger = Logger.getLogger(getClass().getName());
+	
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+		
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}	
+	
 	
 	@GetMapping("/list")
 	public String listMedici(Model theModel) {
-		List<Medico> theMedici = medicoService.findAll();
-		
-		//add to the spring model
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
+		List<Utente> theMedici = utenteService.findByRole_Medico();
 		theModel.addAttribute("medici", theMedici);
-		
+
+		theModel.addAttribute("username", username);
 		return "medici/list-medici";
 	}
 	
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
-		//create model attribute to bind the form data
-		Medico theMedico = new Medico();
-		theModel.addAttribute("medico", theMedico);
-		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
+		theModel.addAttribute("tsUser", new TsUser());
+		theModel.addAttribute("username", username); 
 		return "medici/medico-form";
 	}
-	
 	
 	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(@RequestParam("medicoId") int theId,
+	public String showFormForUpdate(@RequestParam("medicoId") String theUsername,
 													Model theModel) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = ((UserDetails)principal). getUsername();
 		//get the doctor from the service
-		Medico theMedico = medicoService.findById(theId);
-		
+		Utente theMedico = utenteService.findByUsername(theUsername);
+		TsUser theTsMedico = utenteService.updateMedico(theMedico);
+				
 		//set doctor as a model attribute to prepopulate form
-		theModel.addAttribute("medico", theMedico);
-		
+		theModel.addAttribute("medico", theTsMedico);
+		theModel.addAttribute("username", username); 
 		//send over to our form
-		return "medici/medico-form";
+		return "medici/medico-form-update";
 	}
 	
-	@PostMapping("/salva")
-	public String salvaMedico(@ModelAttribute("medico") @Valid Medico theMedico,
-				  BindingResult bindingResult) {
-	
-		if(bindingResult.hasErrors()){
-			return "medici/medico-form";
-		}
-		else {
-			//save the doctor
-			medicoService.save(theMedico);
+	@PostMapping("/processRegistrazioneForm")
+	public String processRegistrationForm(
+				@Valid @ModelAttribute("tsUser") TsUser theTsUser, 
+				BindingResult theBindingResult, 
+				Model theModel) {
 		
-		//use a redirect to prevent duplicate submissions
-		return "redirect:/medici/list";
-		}
+		String username = theTsUser.getUsername();
+		logger.info("Processing registration form for: " + username);
+		
+		// form validation
+		 if (theBindingResult.hasErrors()){
+			 return "medici/medico-form";
+	        }
+
+		// check the database if user already exists
+        Utente existing = utenteService.findByUsername(username);
+        if (existing != null){
+        	theModel.addAttribute("tsUser", new TsUser());
+			theModel.addAttribute("registrationError", "Username già esistente.");
+
+			logger.warn("User name già esistente.");
+        	return "login-reg/registrazione-form";
+        }
+        
+        // create user account        						
+        utenteService.salvaMedico(theTsUser);
+        theModel.addAttribute("registrationMedicoSuccess", "Medico registrato.");
+        
+        logger.info("Successfully created medico: " + username);
+        
+        return "redirect:/medici/list";		
 	}
 	
 	@GetMapping("/elimina")
-	public String elimina(@RequestParam("medicoId") int theId) {
+	public String elimina(@RequestParam("medicoId") String theUsername) {
 		//delete the doctor
-		medicoService.deleteById(theId);
+		utenteService.deleteByUsername(theUsername);
 		
 		//redirect
 		return "redirect:/medici/list";
 	}
 	
-	@GetMapping("/cerca")
-	public String cerca(@RequestParam("nome") String theNome,
-						 @RequestParam("cognome") String theCognome,
-						 Model theModel) {
-		
-		// check names, if both are empty then just give list of all employees
-
-		if (theNome.trim().isEmpty() && theCognome.trim().isEmpty()) {
-			return "redirect:/medici/list";
-		}
-		else {
-			// else, search by first name and last name
-			List<Medico> theMedici =
-							medicoService.searchBy(theNome, theCognome);
-			
-			// add to the spring model
-			theModel.addAttribute("medici", theMedici);
-			
-			// send to list-medici
-			return "medici/list-medici";
-		}
-		
+	
+	@PostMapping("/update")
+	public String updateMedico(@Valid @ModelAttribute("tsUser") TsUser theTsUser) {
+		String username = theTsUser.getUsername();
+		logger.info("Processing update for medico: " + username);
+		utenteService.salvaMedico(theTsUser);
+		return "redirect:/medici/list";
 	}
 }
